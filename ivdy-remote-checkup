@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Remote Großes Blutbild | IVDY</title>
+  <style>
+    :root {
+      --primary: #1d2f86;
+      --accent: #ff1e00;
+      --light: #f9f9f9;
+      --dark: #111;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 2.5rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      margin-top: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .section {
+      padding: 2.5rem 1rem;
+      max-width: 960px;
+      margin: auto;
+    }
+
+    .section h2 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-box {
+      background: white;
+      border-left: 4px solid var(--primary);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    ul.checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.checklist li::before {
+      content: "✅";
+      margin-right: 0.5rem;
+      color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .footer-content {
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .footer-content a {
+      color: white;
+      text-decoration: underline;
+      margin: 0 0.5rem;
+    }
+
+    .footer-content a:hover {
+      color: var(--accent);
+    }
+
+    footer {
+      background-color: var(--primary);
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+
+      .section {
+        padding: 2rem 1rem;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+      }
+
+      td::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 45%;
+        padding-left: 0.5rem;
+        font-weight: bold;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🩸 Remote Großes Blutbild – Modernste Blutdiagnostik für Zuhause oder unterwegs</h1>
+    <p>Volle Labordiagnostik ohne Praxisbesuch – mit CE-zertifizierter Technologie, Laborpartnern & DSGVO-konformer Cloudlösung.</p>
+    <a href="#kontakt" class="cta-button">📬 Jetzt starten</a>
+  </header>
+
+  <section class="section">
+    <h2>✅ Ihre Vorteile auf einen Blick</h2>
+    <div class="highlight-box">
+      <ul class="checklist">
+        <li>Vollständiges Großes Blutbild (CBC mit Differential)</li>
+        <li>Inklusive Erythrozyten, Leukozyten (5-Part-Differenzierung), Hämoglobin, Hämatokrit, Thrombozyten & mehr</li>
+        <li>Modernste Sampling-Technologie (Tasso+, TAP II oder Fingerstick)</li>
+        <li>Zertifizierte Labore in Deutschland (Synlab, LADR, Labor Berlin)</li>
+        <li>DSGVO-konforme Cloud mit FHIR API & HL7-Kompatibilität</li>
+        <li>Schnelle Ergebnisse: 24–48 h nach Probeneingang</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💡 So funktioniert’s</h2>
+    <table>
+      <thead>
+        <tr><th>Schritt</th><th>Beschreibung</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>🛒 1. Bestellung & Zustimmung</td><td>Test beauftragen & DSGVO-konform zustimmen (App/Web)</td></tr>
+        <tr><td>📦 2. Versand des Kits</td><td>Kapillarblut-Kit inkl. Rücksendematerial kommt per Post</td></tr>
+        <tr><td>🩸 3. Selbstentnahme oder Hausbesuch</td><td>Selbst durchführen oder mit medizinischer Hilfe</td></tr>
+        <tr><td>🚚 4. Rückversand ans Labor</td><td>DHL Medical Express mit stabilisierter Verpackung</td></tr>
+        <tr><td>🧪 5. Laborauswertung</td><td>Analyse in zertifiziertem Labor (CBC inkl. Differential)</td></tr>
+        <tr><td>📲 6. Ergebnisbereitstellung</td><td>Digital via Cloud, FHIR-API oder PDF</td></tr>
+        <tr><td>🩺 7. Ärztliche Bewertung (optional)</td><td>Optional: KI-Analyse & Fernkonsultation</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>🚀 Einsatzmöglichkeiten</h2>
+    <ul class="checklist">
+      <li>Mobile Hausbesuche</li>
+      <li>Telemedizinische Diagnostik</li>
+      <li>Präventionsprogramme</li>
+      <li>Gesundheits-CheckUps in Unternehmen</li>
+      <li>Pflege- & Seniorenbetreuung</li>
+      <li>Digitale Gesundheitsanwendungen (DiGA-kompatibel)</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>🔐 Sicherheit & Konformität</h2>
+    <ul class="checklist">
+      <li>DSGVO-konform & Ende-zu-Ende verschlüsselt</li>
+      <li>MDR-konforme Sampling-Geräte mit CE-Zertifikat</li>
+      <li>Anbindung an zertifizierte Telemedizin-Anbieter (TeleClinic, Avi Medical)</li>
+      <li>Optional: DiGA-Strategie zur Kostenerstattung</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>🔧 Technologische Integration & Cloud-Infrastruktur</h2>
+    <ul class="checklist">
+      <li>FHIR-kompatible Ergebnisübermittlung</li>
+      <li>RESTful API zu Praxen, Kliniken & Patienten-Apps</li>
+      <li>IVDY Blockchain: Sicher & rückverfolgbar</li>
+      <li>Optional: KI zur Ergebnisinterpretation & Priorisierung</li>
+    </ul>
+  </section>
+
+  <section class="section" id="kontakt">
+    <h2>📬 Jetzt starten – Remote Großes Blutbild als Service</h2>
+    <p>
+      👉 Kontaktieren Sie uns für:
+    </p>
+    <ul class="checklist">
+      <li>Pilotprojekte & Studienintegration</li>
+      <li>Skalierbare B2B-Lösungen für Praxen, Kliniken & Digital Health Anbieter</li>
+      <li>Individuelle Angebotserstellung mit passendem Labornetzwerk & Technologieauswahl</li>
+    </ul>
+    <a href="mailto:kontakt@ivdy.health" class="cta-button">📧 Anfrage senden</a>
+  </section>
+
+  <!-- Footer Bereich -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 IVDY – Alle Rechte vorbehalten.</p>
+      <p>
+        <a href="impressum.html">Impressum</a> |
+        <a href="agb.html">AGB</a> |
+        <a href="datenschutz.html">Datenschutz</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
