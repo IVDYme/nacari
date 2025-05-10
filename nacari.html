@@ -99,26 +99,54 @@
     footer a:hover {
       text-decoration: underline;
     }
+    .language-toggle {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background-color: #273E36;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .language-toggle select {
+      background-color: #C7B166;
+      color: #000;
+      border: none;
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>NACARI: Die weltweit führende selbstgenügsame Kryptowährung</h1>
+    <h1 id="heading-title">NACARI: Die weltweit führende selbstgenügsame Kryptowährung</h1>
   </header>
+
+  <div class="language-toggle">
+    <label for="language-select">Sprache:</label>
+    <select id="language-select" onchange="changeLanguage()">
+      <option value="de">Deutsch</option>
+      <option value="en">English</option>
+      <option value="tr">Türkçe</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="it">Italiano</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
   <section class="intro">
-    <h2>Entwickelt, um Bitcoin & Ethereum zu übertreffen</h2>
-    <p>NACARI (NCR) ist die adaptivste, sicherste und leistungsstärkste Kryptowährung auf dem Markt - entworfen für Echtzeit-Transaktionen im Gesundheitswesen und IoT, dezentrale Finanzen und vieles mehr.</p>
+    <h2 id="intro-title">Entwickelt, um Bitcoin & Ethereum zu übertreffen</h2>
+    <p id="intro-text">NACARI (NCR) ist die native Kryptowährung der adaptivste, sicherste und leistungsstärkste Blockchain auf dem Markt - entworfen für Echtzeit-Transaktionen im Gesundheitswesen und IoT, dezentrale Finanzen und vieles mehr.</p>
   </section>
-  
+
   <section class="intro">
-    <h2>Transformiere das Gesundheitswesen. Ermächtige die Finanzen. Führe die dezentrale Revolution an.</h2>
-    <p>Wir laden dich ein, Teil von IVDY zu werden – der ersten dezentralen Blockchain-Plattform, die speziell für Echtzeit-Gesundheitswesen, Smart Contracts und leistungsstarke medizinische Datensysteme entwickelt wurde.</p>
-    <p>Zusammen mit NACARI (NCR) – der nativen Kryptowährung, die das IVDY-Ökosystem antreibt – eröffnet dieses Angebot eine unvergleichliche Gelegenheit an der Schnittstelle von Medizin, Blockchain und KI-gesteuerten Finanzen.</p>
+    <h2 id="transform-title">Transformiere das Gesundheitswesen. Ermächtige die Finanzen. Führe die dezentrale Revolution an.</h2>
+    <p id="transform-text">Wir laden dich ein, Teil von IVDY zu werden – der ersten dezentralen Blockchain-Plattform, die speziell für Echtzeit-Gesundheitswesen, Smart Contracts und leistungsstarke medizinische Datensysteme entwickelt wurde.</p>
+    <p id="transform-text-2">Zusammen mit NACARI (NCR) – der nativen Kryptowährung, die das IVDY-Ökosystem antreibt – eröffnet dieses Angebot eine unvergleichliche Gelegenheit an der Schnittstelle von Medizin, Blockchain und KI-gesteuerten Finanzen.</p>
   </section>
 
   <section class="features">
-    <h3>Was ist NACARI?</h3>
-    <p>NACARI (NCR) ist eine dezentrale, selbstgenügsame Kryptowährung, die speziell entwickelt wurde, um die Digitalisierung des Gesundheitswesens und der Finanzmärkte zu unterstützen. Durch seine adaptiven Eigenschaften ist NACARI nicht nur als digitale Währung, sondern als Grundlage für das IVDY-Ökosystem von entscheidender Bedeutung. Mit seiner extrem schnellen Transaktionsgeschwindigkeit und der Unterstützung von Smart Contracts, eröffnet NACARI neue Möglichkeiten im Bereich der Gesundheitsversorgung, IoT und der dezentralen Finanzen.</p>
+    <h3 id="features-title">Was ist NACARI?</h3>
+    <p id="features-text">NACARI (NCR) ist eine dezentrale, selbstgenügsame Kryptowährung, die speziell entwickelt wurde, um die Digitalisierung des Gesundheitswesens und der Finanzmärkte zu unterstützen. Durch seine adaptiven Eigenschaften ist NACARI nicht nur als digitale Währung, sondern als Grundlage für das IVDY-Ökosystem von entscheidender Bedeutung. Mit seiner extrem schnellen Transaktionsgeschwindigkeit und der Unterstützung von Smart Contracts, eröffnet NACARI neue Möglichkeiten im Bereich der Gesundheitsversorgung, IoT und der dezentralen Finanzen.</p>
     <ul>
       <li>✓ Selbstgenügsam, adaptiv und zukunftssicher</li>
       <li>✓ Nahtlose Integration in das IVDY-Gesundheitsökosystem</li>
@@ -172,5 +200,29 @@
       <a href="datenschutz.html">Datenschutz</a>
     </div>
   </footer>
+
+  <script>
+    function changeLanguage() {
+      const lang = document.getElementById('language-select').value;
+      const translations = {
+        de: {
+          "heading-title": "NACARI: Die weltweit führende selbstgenügsame Kryptowährung",
+          "intro-title": "Entwickelt, um Bitcoin & Ethereum zu übertreffen",
+          "intro-text": "NACARI (NCR) ist die native Kryptowährung der adaptivste, sicherste und leistungsstärkste Blockchain auf dem Markt - entworfen für Echtzeit-Transaktionen im Gesundheitswesen und IoT, dezentrale Finanzen und vieles mehr.",
+          "transform-title": "Transformiere das Gesundheitswesen. Ermächtige die Finanzen. Führe die dezentrale Revolution an.",
+          "transform-text": "Wir laden dich ein, Teil von IVDY zu werden – der ersten dezentralen Blockchain-Plattform, die speziell für Echtzeit-Gesundheitswesen, Smart Contracts und leistungsstarke medizinische Datensysteme entwickelt wurde.",
+          "transform-text-2": "Zusammen mit NACARI (NCR) – der nativen Kryptowährung, die das IVDY-Ökosystem antreibt – eröffnet dieses Angebot eine unvergleichliche Gelegenheit an der Schnittstelle von Medizin, Blockchain und KI-gesteuerten Finanzen.",
+          "features-title": "Was ist NACARI?",
+          "features-text": "NACARI (NCR) ist eine dezentrale, selbstgenügsame Kryptowährung, die speziell entwickelt wurde, um die Digitalisierung des Gesundheitswesens und der Finanzmärkte zu unterstützen. Durch seine adaptiven Eigenschaften ist NACARI nicht nur als digitale Währung, sondern als Grundlage für das IVDY-Ökosystem von entscheidender Bedeutung. Mit seiner extrem schnellen Transaktionsgeschwindigkeit und der Unterstützung von Smart Contracts, eröffnet NACARI neue Möglichkeiten im Bereich der Gesundheitsversorgung, IoT und der dezentralen Finanzen.",
+        },
+        // Add translations for other languages here (en, tr, fr, es, it, ar)
+      };
+      
+      const selectedLang = translations[lang];
+      for (let key in selectedLang) {
+        document.getElementById(key).innerText = selectedLang[key];
+      }
+    }
+  </script>
 </body>
 </html>
