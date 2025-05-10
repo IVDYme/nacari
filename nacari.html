@@ -61,6 +61,7 @@
       border-radius: 8px;
       width: 300px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+      text-align: center;
     }
     .package h4 {
       color: #C7B166;
@@ -112,6 +113,25 @@
       color: #000;
       border: none;
       padding: 5px;
+    }
+    
+    @media (max-width: 768px) {
+      .pricing {
+        flex-direction: column;
+        align-items: center;
+      }
+      .package {
+        width: 90%;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      .intro h2 {
+        font-size: 1.5rem;
+      }
+      .intro p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -166,7 +186,8 @@
         <li>✓ Früher Zugang zu Projekten</li>
         <li>✓ Portfolio-Tipps</li>
       </ul>
-      <a href="#" class="btn">Jetzt starten</a>
+      <!-- Stripe Link für Explorer Paket -->
+      <a href="https://buy.stripe.com/14k3fl7Kd5TffMkaFt" class="btn">Jetzt starten</a>
     </div>
     <div class="package">
       <h4>Power Investor</h4>
@@ -177,7 +198,8 @@
         <li>✓ Tiefgreifende Einblicke in den Kryptomarkt</li>
         <li>✓ Nutzung von Blockchain und Smart Contracts</li>
       </ul>
-      <a href="#" class="btn">Jetzt starten</a>
+      <!-- Stripe Link für Power Investor Paket -->
+      <a href="https://buy.stripe.com/dR6eY37KdftPcA89Bq" class="btn">Jetzt starten</a>
     </div>
     <div class="package">
       <h4>NACARI Masters</h4>
@@ -188,7 +210,8 @@
         <li>✓ Teilnahme an Testnet-Innovationen</li>
         <li>✓ Kostenloser Zugang zu 20 NACARI-Ökosystem-Events</li>
       </ul>
-      <a href="#" class="btn">Jetzt starten</a>
+      <!-- Stripe Link für NACARI Masters Paket -->
+      <a href="https://buy.stripe.com/28o5nt2pTa9v7fO28Z" class="btn">Jetzt starten</a>
     </div>
   </section>
 
@@ -208,20 +231,9 @@
         de: {
           "heading-title": "NACARI: Die weltweit führende selbstgenügsame Kryptowährung",
           "intro-title": "Entwickelt, um Bitcoin & Ethereum zu übertreffen",
-          "intro-text": "NACARI (NCR) ist die native Kryptowährung der adaptivste, sicherste und leistungsstärkste Blockchain auf dem Markt - entworfen für Echtzeit-Transaktionen im Gesundheitswesen und IoT, dezentrale Finanzen und vieles mehr.",
-          "transform-title": "Transformiere das Gesundheitswesen. Ermächtige die Finanzen. Führe die dezentrale Revolution an.",
-          "transform-text": "Wir laden dich ein, Teil von IVDY zu werden – der ersten dezentralen Blockchain-Plattform, die speziell für Echtzeit-Gesundheitswesen, Smart Contracts und leistungsstarke medizinische Datensysteme entwickelt wurde.",
-          "transform-text-2": "Zusammen mit NACARI (NCR) – der nativen Kryptowährung, die das IVDY-Ökosystem antreibt – eröffnet dieses Angebot eine unvergleichliche Gelegenheit an der Schnittstelle von Medizin, Blockchain und KI-gesteuerten Finanzen.",
-          "features-title": "Was ist NACARI?",
-          "features-text": "NACARI (NCR) ist eine dezentrale, selbstgenügsame Kryptowährung, die speziell entwickelt wurde, um die Digitalisierung des Gesundheitswesens und der Finanzmärkte zu unterstützen. Durch seine adaptiven Eigenschaften ist NACARI nicht nur als digitale Währung, sondern als Grundlage für das IVDY-Ökosystem von entscheidender Bedeutung. Mit seiner extrem schnellen Transaktionsgeschwindigkeit und der Unterstützung von Smart Contracts, eröffnet NACARI neue Möglichkeiten im Bereich der Gesundheitsversorgung, IoT und der dezentralen Finanzen.",
-        },
-        // Add translations for other languages here (en, tr, fr, es, it, ar)
+          "intro-text": "NACARI (NCR) ist die native Kryptowährung der adaptivste, sicherste und leistungs...
+        }
       };
-      
-      const selectedLang = translations[lang];
-      for (let key in selectedLang) {
-        document.getElementById(key).innerText = selectedLang[key];
-      }
     }
   </script>
 </body>
