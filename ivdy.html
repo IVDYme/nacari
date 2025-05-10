@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NACARI Contact</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="bg-primary text-white text-center py-3">
+    <h1 id="formTitle">Contact Form</h1>
+    <p id="formSubtitle">Transform Healthcare. Empower Finance. Lead the Decentralized Revolution.<br>
+      We invite you to be part of IVDY — the first decentralized blockchain platform purpose-built for real-time healthcare, smart contracts, and high-performance medical data systems.<br>
+      Paired with NACARI (NCR) — the native cryptocurrency powering the IVDY ecosystem — this offer unlocks an unmatched opportunity at the intersection of medicine, blockchain, and AI-driven finance.</p>
+  </header>
+
+  <div class="container mt-4">
+    <form id="contactForm">
+      <div class="mb-3">
+        <label for="name" class="form-label" id="nameLabel">Name</label>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label" id="emailLabel">Email</label>
+        <input type="email" class="form-control" id="email" name="email">
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label" id="messageLabel">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="5"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+    </form>
+
+    <div class="mt-4">
+      <label for="languageSelect" class="form-label">Language</label>
+      <select id="languageSelect" class="form-select" aria-label="Select language">
+        <option value="en" selected>English</option>
+        <option value="tr">Türkçe</option>
+        <option value="es">Español</option>
+        <option value="ar">العربية</option>
+        <option value="ja">日本語</option>
+        <option value="zh">中文</option>
+        <option value="ru">Русский</option>
+      </select>
+    </div>
+
+    <section class="mt-5">
+      <h2 id="packagesTitle">Choose Your Plan</h2>
+      <div class="row" id="packagesContainer">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" id="basicPlanTitle">Basic</h5>
+              <p class="card-text" id="basicPlanDesc">For single healthcare professionals. Includes IVDY access, NACARI wallet, and smart contract setup. </p>
+              <p class="card-text fw-bold" id="basicPlanPrice">€97,000</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" id="proPlanTitle">Professional</h5>
+              <p class="card-text" id="proPlanDesc">For group practices or clinics. Full IVDY integration, smart contracts, technical support.</p>
+              <p class="card-text fw-bold" id="proPlanPrice">€297,000</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" id="enterprisePlanTitle">Enterprise</h5>
+              <p class="card-text" id="enterprisePlanDesc">For hospitals and large networks. All features, 24/7 support, premium data analytics integration.</p>
+              <p class="card-text fw-bold" id="enterprisePlanPrice">€597,000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="bg-light text-center py-3 mt-4">
+    <p id="footerText">&copy; 2025 NACARI. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        formTitle: "Contact Form",
+        formSubtitle: "Transform Healthcare. Empower Finance. Lead the Decentralized Revolution.\nWe invite you to be part of IVDY — the first decentralized blockchain platform purpose-built for real-time healthcare, smart contracts, and high-performance medical data systems.\nPaired with NACARI (NCR) — the native cryptocurrency powering the IVDY ecosystem — this offer unlocks an unmatched opportunity at the intersection of medicine, blockchain, and AI-driven finance.",
+        nameLabel: "Name",
+        emailLabel: "Email",
+        messageLabel: "Message",
+        submitButton: "Submit",
+        footerText: "© 2025 NACARI. All rights reserved.",
+        packagesTitle: "Choose Your Plan",
+        basicPlanTitle: "Basic",
+        basicPlanDesc: "For single healthcare professionals. Includes IVDY access, NACARI wallet, and smart contract setup.",
+        basicPlanPrice: "€97,000",
+        proPlanTitle: "Professional",
+        proPlanDesc: "For group practices or clinics. Full IVDY integration, smart contracts, technical support.",
+        proPlanPrice: "€297,000",
+        enterprisePlanTitle: "Enterprise",
+        enterprisePlanDesc: "For hospitals and large networks. All features, 24/7 support, premium data analytics integration.",
+        enterprisePlanPrice: "€597,000"
+      }
+      // Add more languages here...
+    };
+
+    document.getElementById("languageSelect").addEventListener("change", function () {
+      const lang = this.value;
+      const t = translations[lang] || translations["en"];
+      document.getElementById("formTitle").textContent = t.formTitle;
+      document.getElementById("formSubtitle").textContent = t.formSubtitle;
+      document.getElementById("nameLabel").textContent = t.nameLabel;
+      document.getElementById("emailLabel").textContent = t.emailLabel;
+      document.getElementById("messageLabel").textContent = t.messageLabel;
+      document.getElementById("submitButton").textContent = t.submitButton;
+      document.getElementById("footerText").textContent = t.footerText;
+      document.getElementById("packagesTitle").textContent = t.packagesTitle;
+      document.getElementById("basicPlanTitle").textContent = t.basicPlanTitle;
+      document.getElementById("basicPlanDesc").textContent = t.basicPlanDesc;
+      document.getElementById("basicPlanPrice").textContent = t.basicPlanPrice;
+      document.getElementById("proPlanTitle").textContent = t.proPlanTitle;
+      document.getElementById("proPlanDesc").textContent = t.proPlanDesc;
+      document.getElementById("proPlanPrice").textContent = t.proPlanPrice;
+      document.getElementById("enterprisePlanTitle").textContent = t.enterprisePlanTitle;
+      document.getElementById("enterprisePlanDesc").textContent = t.enterprisePlanDesc;
+      document.getElementById("enterprisePlanPrice").textContent = t.enterprisePlanPrice;
+    });
+  </script>
+</body>
+
+</html>
