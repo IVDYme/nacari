@@ -6,10 +6,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NACARI Kontakt</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Kontaktformular Hintergrund in IVDY Blau */
+    #contactFormContainer {
+      background-color: #1d2f86; /* IVDY Blau */
+      padding: 30px;
+      border-radius: 10px;
+      color: white;
+    }
+
+    /* Rote Buttons unter den Paketen */
+    .package-button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      display: block;
+      width: 100%;
+      margin-top: 15px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    /* Fußzeile mit links und rechts angeordneten Links */
+    .footer {
+      background-color: #1d2f86; /* IVDY Blau */
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between; /* Platzierung von Text und Links auf einer Ebene */
+      align-items: center; /* Vertikale Ausrichtung */
+    }
+
+    .footer-text {
+      color: white;
+      padding-left: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Header Hintergrundfarbe in IVDY Blau */
+    header {
+      background-color: #1d2f86; /* IVDY Blau */
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
-  <header class="bg-primary text-white text-center py-3">
+  <header class="text-center py-3">
     <h1 id="formTitle">Kontaktformular</h1>
     <p id="formSubtitle">Transformiere das Gesundheitswesen. Befähige Finanzwesen. Führe die dezentrale Revolution an.<br>
       Wir laden dich ein, Teil von NACARI zu werden — der ersten dezentralen Blockchain-Plattform, die speziell für Echtzeit-Gesundheitsversorgung, intelligente Verträge und leistungsstarke medizinische Datensysteme entwickelt wurde.<br>
@@ -30,6 +88,7 @@
               <li>Integration von NACARI für einfache Transaktionen</li>
               <li>24/7 Technischer Support</li>
             </ul>
+            <button class="package-button">Mehr Erfahren</button>
           </div>
         </div>
       </div>
@@ -44,6 +103,7 @@
               <li>Maßgeschneiderte Lösungen für Praxisabläufe</li>
               <li>Hochwertiger Support und Beratung</li>
             </ul>
+            <button class="package-button">Mehr Erfahren</button>
           </div>
         </div>
       </div>
@@ -58,107 +118,44 @@
               <li>Integration von Smart Contracts und Echtzeit-Datenverwaltung</li>
               <li>Vollständige Systemoptimierung und Datenschutzlösungen</li>
             </ul>
+            <button class="package-button">Mehr Erfahren</button>
           </div>
         </div>
       </div>
     </div>
 
-    <form id="contactForm" class="mt-4">
-      <div class="mb-3">
-        <label for="name" class="form-label" id="nameLabel">Name</label>
-        <input type="text" class="form-control" id="name" name="name">
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label" id="emailLabel">E-Mail</label>
-        <input type="email" class="form-control" id="email" name="email">
-      </div>
-      <div class="mb-3">
-        <label for="message" class="form-label" id="messageLabel">Nachricht</label>
-        <textarea class="form-control" id="message" name="message" rows="5"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" id="submitButton">Absenden</button>
-    </form>
-
-    <div class="mt-4">
-      <label for="languageSelect" class="form-label">Sprache</label>
-      <select id="languageSelect" class="form-select" aria-label="Sprache auswählen">
-        <option value="de" selected>Deutsch</option>
-        <option value="en">English</option>
-        <option value="tr">Türkçe</option>
-        <option value="es">Español</option>
-        <option value="ar">العربية</option>
-        <option value="ja">日本語</option>
-        <option value="zh">中文</option>
-        <option value="ru">Русский</option>
-      </select>
+    <div id="contactFormContainer" class="mt-4">
+      <form id="contactForm">
+        <div class="mb-3">
+          <label for="name" class="form-label" id="nameLabel">Name</label>
+          <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label" id="emailLabel">E-Mail</label>
+          <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label" id="messageLabel">Nachricht</label>
+          <textarea class="form-control" id="message" name="message" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-light" id="submitButton">Absenden</button>
+      </form>
     </div>
   </div>
 
-  <footer class="bg-light text-center py-3 mt-4">
-    <p id="footerText">&copy; 2025 NACARI. Alle Rechte vorbehalten.</p>
+  <footer class="footer">
+    <div class="footer-text">
+      <p>© 2025 IVDY. Alle Rechte vorbehalten.</p>
+    </div>
+    <div class="footer-links">
+      <a href="impressum.html">Impressum</a>
+      <a href="agb.html">AGB</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </div>
   </footer>
 
   <script>
-    const translations = {
-      de: {
-        formTitle: "Kontaktformular",
-        formSubtitle: "Transformiere das Gesundheitswesen. Befähige Finanzwesen. Führe die dezentrale Revolution an.\nWir laden dich ein, Teil von NACARI zu werden — der ersten dezentralen Blockchain-Plattform, die speziell für Echtzeit-Gesundheitsversorgung, intelligente Verträge und leistungsstarke medizinische Datensysteme entwickelt wurde.\nKombiniert mit NACARI (NCR) — der nativen Kryptowährung, die das NACARI-Ökosystem antreibt — eröffnet dieses Angebot eine unvergleichliche Gelegenheit an der Schnittstelle von Medizin, Blockchain und KI-gesteuertem Finanzwesen.",
-        nameLabel: "Name",
-        emailLabel: "E-Mail",
-        messageLabel: "Nachricht",
-        submitButton: "Absenden",
-        footerText: "© 2025 NACARI. Alle Rechte vorbehalten.",
-        packageBasic: "Basic",
-        packageProfessional: "Professional",
-        packageEnterprise: "Enterprise",
-        packagePriceBasic: "Preis: 97.000 €",
-        packagePriceProfessional: "Preis: 297.000 €",
-        packagePriceEnterprise: "Preis: 597.000 €",
-        packageForBasic: "Für Arztpraxen mit bis zu 2 Ärzten.",
-        packageForProfessional: "Für Arztpraxen mit mehr als 2 Ärzten.",
-        packageForEnterprise: "Für Krankenhäuser oder große medizinische Einrichtungen.",
-        packageFeaturesBasic: [
-          "Zugang zu den grundlegenden Funktionen von NACARI",
-          "Integration von NACARI für einfache Transaktionen",
-          "24/7 Technischer Support"
-        ],
-        packageFeaturesProfessional: [
-          "Erweiterte Funktionen für die Integration medizinischer Daten",
-          "Maßgeschneiderte Lösungen für Praxisabläufe",
-          "Hochwertiger Support und Beratung"
-        ],
-        packageFeaturesEnterprise: [
-          "Umfassende Integration des NACARI-Systems",
-          "Integration von Smart Contracts und Echtzeit-Datenverwaltung",
-          "Vollständige Systemoptimierung und Datenschutzlösungen"
-        ]
-      },
-      // English and other languages can be added here
-    };
-
-    document.getElementById("languageSelect").addEventListener("change", function () {
-      const lang = this.value;
-      const t = translations[lang] || translations["de"];
-      document.getElementById("formTitle").textContent = t.formTitle;
-      document.getElementById("formSubtitle").textContent = t.formSubtitle;
-      document.getElementById("nameLabel").textContent = t.nameLabel;
-      document.getElementById("emailLabel").textContent = t.emailLabel;
-      document.getElementById("messageLabel").textContent = t.messageLabel;
-      document.getElementById("submitButton").textContent = t.submitButton;
-      document.getElementById("footerText").textContent = t.footerText;
-      // Additional language translation for package sections
-      document.querySelectorAll('.card-title')[0].textContent = t.packageBasic;
-      document.querySelectorAll('.card-title')[1].textContent = t.packageProfessional;
-      document.querySelectorAll('.card-title')[2].textContent = t.packageEnterprise;
-
-      document.querySelectorAll('.card-text')[0].textContent = t.packagePriceBasic;
-      document.querySelectorAll('.card-text')[1].textContent = t.packagePriceProfessional;
-      document.querySelectorAll('.card-text')[2].textContent = t.packagePriceEnterprise;
-
-      document.querySelectorAll('.card-body ul')[0].innerHTML = t.packageFeaturesBasic.map(feature => `<li>${feature}</li>`).join('');
-      document.querySelectorAll('.card-body ul')[1].innerHTML = t.packageFeaturesProfessional.map(feature => `<li>${feature}</li>`).join('');
-      document.querySelectorAll('.card-body ul')[2].innerHTML = t.packageFeaturesEnterprise.map(feature => `<li>${feature}</li>`).join('');
-    });
+    // JavaScript für Formular und Interaktivität hier (falls erforderlich)
   </script>
 </body>
 
