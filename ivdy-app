@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IVDY Remote Checkup</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fb;
+      color: #111;
+      text-align: center;
+    }
+
+    .loading-screen, .promo-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .loading-screen.active,
+    .promo-screen.active {
+      display: flex;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #072fa0; /* Dunkelblau */
+      margin-top: 20px;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .loading-icon {
+      width: 100px;
+      height: 100px;
+      margin: 40px 0 10px;
+    }
+
+    .button {
+      background: linear-gradient(to bottom, #072fa0, #5a99e6); /* Dunkelblau als Startfarbe */
+      color: white;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .feature {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin: 10px;
+      width: 180px; /* Breiterer Bereich für längere Texte */
+    }
+
+    .premium-badge {
+      background: #072fa0; /* Dunkelblau */
+      color: white;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen 1: Loading -->
+  <div class="loading-screen active" id="screen1">
+    <img src="logo.png" alt="IVDY Logo" style="width:80px;">
+    <div class="logo">IVDY</div>
+    <div class="subtitle">Ihr persönlicher Blutmonitor</div>
+    <img class="loading-icon" src="monitor-icon.png" alt="Monitor Icon">
+    <p>Wird geladen...</p>
+  </div>
+
+  <!-- Screen 2: Promo -->
+  <div class="promo-screen" id="screen2">
+    <div style="display:flex; align-items:center; justify-content:center;">
+      <div class="logo">IVDY</div>
+      <div class="premium-badge">Premium</div>
+    </div>
+    <img src="runner.png" alt="Runner" style="width:90%; max-width:400px; border-radius:15px; margin-top:20px;">
+    <h2 style="padding: 0 10px;">Erhalten Sie uneingeschränkten Zugriff auf alle Funktionen</h2>
+
+    <div class="features">
+      <div class="feature">KI-gestützte Bluttest-Analyse</div>
+      <div class="feature">Testosteron-Check</div>
+      <div class="feature">Hormon-Analyse</div>
+      <div class="feature">Fernüberwachung von Vitalparametern</div>
+    </div>
+
+    <p style="font-size:0.9rem; color:#666;">Nur 29 €/WOCHE, automatisch erneuert</p>
+    <a href="#" class="button">IVDY CheckUp Starten</a>
+  </div>
+
+  <script>
+    // Automatischer Wechsel nach 3 Sekunden zu Promo
+    setTimeout(() => {
+      document.getElementById("screen1").classList.remove("active");
+      document.getElementById("screen2").classList.add("active");
+    }, 3000);
+  </script>
+
+</body>
+</html>
