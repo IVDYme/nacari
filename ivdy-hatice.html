@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVDY - Mein Konto</title>
+    
+    <style>
+        :root {
+            --ivdy-blau: #1d2f86;
+            --ivdy-rot: #ff1e00;
+            --text-weiss: #ffffff;
+            --text-dunkel: #333333;
+            --text-mittel: #555555;
+            --text-hell: #777777;
+            --hintergrund-hell: #f4f4f8;
+            --hintergrund-karte: #ffffff;
+            --border-farbe: #dddddd;
+            --border-radius-standard: 8px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: var(--hintergrund-hell);
+            color: var(--text-dunkel);
+        }
+
+        .app-container {
+            max-width: 420px;
+            margin: 0 auto;
+            background-color: var(--hintergrund-karte);
+            min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        header.ivdy-header {
+            background-color: var(--ivdy-blau);
+            color: var(--text-weiss);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header.ivdy-header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        header.ivdy-header .icons span {
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        
+        main {
+            padding: 20px;
+        }
+
+        .profile-card {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-farbe);
+            margin-bottom: 20px;
+        }
+
+        .profile-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--ivdy-blau);
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .profile-card h2 {
+            margin: 10px 0 5px 0;
+            color: var(--text-dunkel);
+        }
+        
+        .profile-card .medical-info p {
+            font-size: 0.9em;
+            color: var(--text-mittel);
+            margin: 4px 0;
+            line-height: 1.4;
+        }
+        .profile-card .medical-info a.doctor-specialty-link {
+            color: var(--ivdy-blau);
+            text-decoration: none;
+        }
+        .profile-card .medical-info a.doctor-specialty-link:hover {
+            text-decoration: underline;
+        }
+
+
+        .profile-card button.change-button {
+            background-color: transparent;
+            color: var(--ivdy-blau);
+            border: 1px solid var(--ivdy-blau);
+            padding: 6px 12px;
+            border-radius: var(--border-radius-standard);
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+        .profile-card button.change-button:hover {
+            background-color: var(--ivdy-blau);
+            color: var(--text-weiss);
+        }
+
+        .patient-details {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-farbe);
+            margin-bottom: 20px;
+        }
+        .patient-details .detail-item {
+            flex: 1;
+        }
+        .patient-details .detail-item .icon {
+             font-size: 1.6em; 
+             margin-bottom: 5px; 
+             color: var(--ivdy-blau);
+        }
+        .patient-details .detail-item .label { 
+            font-size: 0.8em;
+            color: var(--text-hell);
+        }
+        .patient-details .detail-item .value { 
+            font-weight: bold;
+            font-size: 1.1em;
+            color: var(--text-dunkel);
+        }
+        
+        .styled-card {
+            background-color: var(--hintergrund-hell);
+            padding: 15px;
+            border-radius: var(--border-radius-standard);
+            margin-bottom: 20px;
+            border: 1px solid var(--border-farbe);
+        }
+
+        .styled-card h3, .styled-card h4 {
+            margin-top: 0;
+            font-size: 1em;
+            color: var(--text-dunkel);
+        }
+         .styled-card h4 {
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+
+        .styled-card .status-text {
+            color: var(--ivdy-rot); 
+            font-weight: normal;
+            font-size: 0.9em;
+        }
+         .styled-card .status-text-neutral {
+            color: var(--text-mittel);
+            font-weight: normal;
+            font-size: 0.9em;
+        }
+
+
+        .styled-card button.calculate-button,
+        .styled-card button.action-button-card {
+            background-color: transparent;
+            color: var(--ivdy-rot);
+            border: 1px solid var(--ivdy-rot);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            display: inline-block; 
+            margin-top: 10px;
+        }
+        .styled-card button.calculate-button:hover,
+        .styled-card button.action-button-card:hover {
+            background-color: var(--ivdy-rot);
+            color: var(--text-weiss);
+        }
+
+        .styled-card button.action-button-card.blau {
+            color: var(--ivdy-blau);
+            border-color: var(--ivdy-blau);
+        }
+        .styled-card button.action-button-card.blau:hover {
+            background-color: var(--ivdy-blau);
+            color: var(--text-weiss);
+        }
+
+        .additional-checks-container {
+            margin-top: 20px;
+        }
+        .additional-checks-container h3.section-title {
+             font-size: 1.2em;
+             color: var(--text-dunkel);
+             margin-bottom: 15px;
+             padding-bottom: 5px;
+             border-bottom: 1px solid var(--border-farbe);
+        }
+        .additional-checks-list { /* UL für die Liste */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Gleichmäßiger Abstand */
+        }
+
+        .additional-checks-list li { /* LI für jedes Element */
+            width: 48%; /* Zwei Elemente pro Zeile (ungefähr) */
+            margin-bottom: 15px;
+            background-color: var(--hintergrund-karte);
+            border-radius: var(--border-radius-standard);
+            padding: 15px;
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid var(--border-farbe);
+        }
+        .additional-checks-list li h4{
+            font-size: 1em;
+            margin-bottom: 10px;
+            color: var(--text-dunkel);
+        }
+
+        .additional-checks-list li p {
+            font-size: 0.9em;
+            color: var(--text-mittel);
+            margin-bottom: 12px;
+        }
+
+        .additional-checks-list li button {
+            background-color: transparent;
+            color: var(--ivdy-rot);
+            border: 1px solid var(--ivdy-rot);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-top: 5px;
+        }
+
+        .additional-checks-list li button:hover {
+            background-color: var(--ivdy-rot);
+            color: var(--text-weiss);
+        }
+
+
+        .action-buttons button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: var(--border-radius-standard);
+            font-size: 1em;
+            font-weight: bold;
+            color: var(--text-weiss);
+            cursor: pointer;
+        }
+        .action-buttons button.impf-button {
+            background-color: var(--ivdy-rot);
+        }
+        .action-buttons button.share-button {
+            background-color: var(--ivdy-blau);
+        }
+        
+        footer.ivdy-footer nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid var(--border-farbe);
+            background-color: var(--hintergrund-karte);
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        footer.ivdy-footer .nav-item {
+            text-align: center;
+            font-size: 0.8em;
+            color: var(--text-hell);
+            cursor: pointer;
+            padding: 5px;
+        }
+        footer.ivdy-footer .nav-item .icon {
+            font-size: 1.8em;
+            display: block;
+            margin-bottom: 3px;
+        }
+        footer.ivdy-footer .nav-item.active {
+            color: var(--ivdy-blau);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="ivdy-header">
+            <div><span>&#9776;</span></div>
+            <div><h1>IVDY</h1></div>
+            <div class="icons">
+                <span>&#128269;</span>
+                <span>&#128197;</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="profile-card">
+                <div>
+                    <img src="hatice-tavli.jpg" alt="Profilbild Hatice Tavlı">
+                </div>
+                <h2>Hatice Tavlı</h2>
+                <div class="medical-info">
+                    <p>Hausarzt: Dr. med. Karl-Heinz Olbrich</p>
+                    <p><a href="#" class="doctor-specialty-link">Facharzt für Innere Medizin</a></p>
+                </div>
+                <button type="button" class="change-button">Ändern</button>
+            </section>
+
+            <section class="patient-details">
+                <div class="detail-item">
+                    <div class="icon">&#128118;</div>
+                    <div class="label">Alter</div>
+                    <div class="value">38</div>
+                </div>
+                <div class="detail-item">
+                    <div class="icon">&#128207;</div>
+                    <div class="label">Größe</div>
+                    <div class="value">173 cm</div>
+                </div>
+                <div class="detail-item">
+                    <div class="icon">&#9878;</div>
+                    <div class="label">Gewicht</div>
+                    <div class="value">75,00 kg</div>
+                </div>
+                <div class="detail-item">
+                     <div class="icon">&#128167;</div>
+                    <div class="label">Blutgruppe</div>
+                    <div class="value">0 Rh +</div>
+                </div>
+            </section>
+
+            <section class="styled-card risk-assessment">
+                <h3>Kardiovaskuläres Krankheitsrisiko: <span class="status-text">Nicht berechnet</span></h3>
+                <button type="button" class="calculate-button">Berechnen</button>
+            </section>
+
+            <section class="additional-checks-container">
+                <h3 class="section-title">Weitere Analysen & Checks</h3>
+                <ul class="additional-checks-list">
+                    <li>
+                        <h4>Testosteron-Check</h4>
+                        <p>Status: <span class="status-text-neutral">Nicht geprüft</span></p>
+                        <button type="button">Analysieren</button>
+                    </li>
+                    <li>
+                        <h4>Hormon-Analyse</h4>
+                        <p>Status: <span class="status-text-neutral">Nicht geprüft</span></p>
+                        <button type="button">Analysieren</button>
+                    </li>
+                    <li>
+                        <h4>Fernüberwachung von Vitalparametern</h4>
+                        <p>Status: <span class="status-text-neutral">Nicht aktiv</span></p>
+                        <button type="button">Starten / Konfigurieren</button>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="action-buttons">
+                <button type="button" class="impf-button">Impfstatus</button>
+                <button type="button" class="share-button">Schnell teilen</button>
+            </section>
+        </main>
+
+        <footer class="ivdy-footer">
+            <nav>
+                <div class="nav-item active">
+                    <span class="icon">&#128100;</span>
+                    <div>Mein Konto</div>
+                </div>
+                <div class="nav-item">
+                    <span class="icon">&#128276;</span>
+                    <div>Benachrichtigungen</div>
+                </div>
+                <div class="nav-item">
+                    <span class="icon">&#9993;</span>
+                    <div>Nachrichten</div>
+                </div>
+                <div class="nav-item">
+                    <span class="icon">&#128198;</span>
+                    <div>Meine Termine</div>
+                </div>
+            </nav>
+        </footer>
+    </div>
+
+</body>
+</html>
