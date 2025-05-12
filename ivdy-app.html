@@ -3,62 +3,265 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IVDY CheckUp wird geladen...</title>
+  <title>IVDY Remote Checkup</title>
+
+  <link rel="icon" href="ivdy-favicon.ico" type="image/x-icon">
+  <link rel="preload" href="IVDY-logo-transparent.png" as="image">
+  <link rel="preload" href="IVDY-logo-transparent.png" as="image">
+
   <style>
-    /* Basis-Reset und Performance-Optimierung */
-    * {
+    body {
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fb;
+      color: #111;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
       box-sizing: border-box;
     }
 
-    body {
-      background-color: #ffffff;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      height: 100vh;
+    .screen.active {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
     }
 
-    .logo {
-      max-width: 280px;
+    .loading-logo-image {
+      width: 80px;
       height: auto;
-      margin-bottom: 2rem;
+    }
+
+    .logo-text {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1d2f86;
+      margin-top: 10px;
+    }
+
+    .site-subtitle {
+      font-size: 1.2rem;
+      color: #333;
+      margin: 10px 0;
     }
 
     .loading-icon-image {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 1rem;
-      animation: pulse 1.5s infinite;
+      width: 100px;
+      height: 100px;
+      margin: 30px 0 10px;
     }
 
-    h1 {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
+    .loading-message {
+      margin-top: 10px;
       font-size: 1rem;
       color: #555;
     }
 
-    @keyframes pulse {
-      0% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.1); }
-      100% { opacity: 0.6; transform: scale(1); }
+    .promo-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .promo-image-runner {
+      width: 90%;
+      max-width: 400px;
+      border-radius: 15px;
+      margin-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #eee;
+    }
+
+    .promo-main-title {
+      padding: 0 10px;
+      font-size: 1.5rem;
+      margin-top: 25px;
+      margin-bottom: 20px;
+      color: #1d2f86;
+    }
+
+    .promo-price-details {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 25px;
+    }
+
+    .button {
+      background: linear-gradient(to bottom, #1d2f86, #5a99e6);
+      color: white;
+      font-weight: bold;
+      padding: 15px 30px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 20px;
+      display: inline-block;
+      transition: background 0.3s ease, transform 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button:hover,
+    .button:focus {
+      background: #15256f;
+      transform: translateY(-2px);
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px auto;
+      gap: 15px;
+      max-width: 600px;
+    }
+
+    .feature {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin: 0;
+      width: 180px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #333;
+      flex-grow: 1;
+      min-width: 160px;
+    }
+
+    .premium-badge {
+      background: #1d2f86;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      margin-left: 10px;
+      font-weight: bold;
+    }
+
+    @media screen and (max-width: 768px) {
+      .logo-text {
+        font-size: 1.8rem;
+      }
+
+      .site-subtitle {
+        font-size: 1rem;
+      }
+
+      .button {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+
+      .features {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .feature {
+        width: auto;
+        margin: 0 10px;
+      }
+
+      .loading-icon-image {
+        width: 80px;
+        height: 80px;
+      }
+
+      .promo-main-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .screen {
+        padding: 15px;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+      }
+
+      .promo-main-title {
+        font-size: 1.2rem;
+      }
+
+      .button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: calc(100% - 40px);
+        max-width: 300px;
+      }
+
+      .feature {
+        padding: 15px;
+        margin: 0 5px;
+      }
+
+      .premium-badge {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+      }
     }
   </style>
 </head>
 <body>
-  <img class="logo" src="IVDY-logo-transparent.png" alt="IVDY Logo">
-  <img class="loading-icon-image" src="IVDY-logo-transparent.png" alt="IVDY Icon klein">
-  <h1>IVDY CheckUp wird geladen...</h1>
-  <p>Bitte einen Moment Geduld.</p>
+
+  <div class="screen active" id="screen1">
+    <img src="IVDY-logo-transparent.png" alt="IVDY Logo" class="loading-logo-image">
+    <div class="logo-text">IVDY</div>
+    <div class="site-subtitle">Ihr persönlicher Blutmonitor</div>
+    <img class="loading-icon-image" src="IVDY-logo-transparent.png" alt="Monitor Icon">
+    <p class="loading-message">Wird geladen...</p>
+  </div>
+
+  <div class="screen" id="screen2">
+    <div class="promo-header">
+      <div class="logo-text">IVDY</div>
+      <div class="premium-badge">Premium</div>
+    </div>
+
+    <picture>
+      <source srcset="runner-400.webp" type="image/webp">
+      <source srcset="runner-400.jpg" type="image/jpeg">
+      <img src="runner-400.jpg" alt="Runner" class="promo-image-runner" loading="lazy" decoding="async">
+    </picture>
+
+    <h2 class="promo-main-title">Erhalten Sie uneingeschränkten Zugriff auf alle Funktionen</h2>
+
+    <div class="features">
+      <div class="feature">KI-gestützte Bluttest-Analyse</div>
+      <div class="feature">Testosteron-Check</div>
+      <div class="feature">Hormon-Analyse</div>
+      <div class="feature">Fernüberwachung von Vitalparametern</div>
+    </div>
+
+    <p class="promo-price-details">Nur 29 €/WOCHE, automatisch erneuert</p>
+    <a href="https://buy.stripe.com/cN23fl6G9gxTbw48xo" class="button" target="_blank">IVDY CheckUp Starten</a>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const screen1 = document.getElementById("screen1");
+      const screen2 = document.getElementById("screen2");
+
+      setTimeout(function () {
+        screen1.classList.remove("active");
+        screen2.classList.add("active");
+      }, 3000); // Wechsel nach 3 Sekunden
+    });
+  </script>
+
 </body>
 </html>
