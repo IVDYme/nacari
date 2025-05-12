@@ -5,48 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IVDY Remote Checkup</title>
 
-  <!-- Favicon -->
-  <link rel="icon" href="IVDY-logo-transparent.png" type="image/png">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <style>
+  <link rel="preload" href="ivdy-logo-80.png" as="image"> <link rel="preload" href="monitor-icon-100.png" as="image"> <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f3f6fb;
       color: #111;
       text-align: center;
+      /* Verbesserte Schriftdarstellung */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .loading-screen, .promo-screen {
+    /* Basis-Styling für die Screens */
+    .screen {
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh; /* Stellt sicher, dass der Screen die volle Höhe einnimmt */
+      padding: 20px; /* Etwas Innenabstand */
+      box-sizing: border-box; /* Padding wird in Breite/Höhe einberechnet */
     }
 
-    .loading-screen.active,
-    .promo-screen.active {
+    .screen.active {
       display: flex;
     }
 
-    .logo {
+    /* Lade-Bildschirm spezifisch */
+    .loading-logo-image { /* Klasse für das Logo-Bild im Ladebildschirm */
+      width: 80px;
+      height: auto; /* Seitenverhältnis beibehalten */
+    }
+
+    .logo-text { /* Umbenannt von .logo zur Unterscheidung vom Bild-Logo */
       font-size: 2rem;
       font-weight: bold;
       color: #1d2f86; /* IVDY Blau */
-      margin-top: 20px;
+      margin-top: 10px; /* Angepasst, da Bild-Logo darüber ist */
     }
 
-    .subtitle {
+    .site-subtitle { /* Spezifischere Klasse */
       font-size: 1.2rem;
       color: #333;
       margin: 10px 0;
     }
 
-    .loading-icon {
+    .loading-icon-image { /* Klasse für das Lade-Icon-Bild */
       width: 100px;
       height: 100px;
-      margin: 40px 0 10px;
+      margin: 30px 0 10px; /* Angepasster Margin */
+    }
+
+    .loading-message { /* Klasse für die Lade-Nachricht */
+        margin-top: 10px;
+        font-size: 1rem;
+        color: #555;
+    }
+
+
+    /* Promo-Bildschirm spezifisch */
+    .promo-header { /* Container für Logo und Premium-Badge im Promo-Screen */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+
+    .promo-image-runner { /* Klasse für das Läufer-Bild */
+      width: 90%;
+      max-width: 400px;
+      border-radius: 15px;
+      margin-top: 20px;
+      display: block; /* Verhindert extra Leerraum unter dem Bild */
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #eee; /* Platzhalterfarbe bis Bild geladen */
+    }
+
+    .promo-main-title { /* Klasse für den Haupttitel im Promo-Screen */
+        padding: 0 10px;
+        font-size: 1.5rem; /* Etwas größer für mehr Wirkung */
+        margin-top: 25px;
+        margin-bottom: 20px;
+        color: #1d2f86; /* IVDY Blau, konsistent mit Logo */
+    }
+
+    .promo-price-details { /* Klasse für die Preisinfo */
+        font-size:0.9rem;
+        color:#666;
+        margin-top: 25px; /* Mehr Abstand zu den Features */
     }
 
     .button {
@@ -58,111 +108,125 @@
       text-decoration: none;
       margin-top: 20px;
       display: inline-block;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.2s ease; /* Transform-Effekt für Hover hinzugefügt */
+      border: none; /* Für <a>-Tags nicht unbedingt nötig, aber gut für <button> */
+      cursor: pointer;
     }
 
-    .button:hover {
-      background: #1d2f86;
+    .button:hover, .button:focus { /* :focus für bessere Zugänglichkeit */
+      background: #15256f; /* Ein etwas dunkleres Blau für Hover */
+      transform: translateY(-2px); /* Leichter Schwebeeffekt */
     }
 
     .features {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin: 20px 0;
-      gap: 10px; /* Für besseren Abstand bei mobilen Geräten */
+      margin: 20px auto; /* Zentriert die Feature-Boxen */
+      gap: 15px; /* Etwas größerer Abstand zwischen den Features */
+      max-width: 600px; /* Beschränkt die maximale Breite der Feature-Sektion */
     }
 
     .feature {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 15px;
-      margin: 10px;
-      width: 180px; /* Breiterer Bereich für längere Texte */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08); /* Weicherer Schatten */
+      padding: 20px; /* Mehr Innenabstand */
+      margin: 0; /* Margin wird durch 'gap' im Flex-Container gesteuert */
+      width: 180px;
       text-align: center;
+      font-size: 0.95rem; /* Etwas angepasste Schriftgröße */
+      color: #333;
+      flex-grow: 1; /* Erlaubt den Boxen zu wachsen und Platz zu füllen */
+      min-width: 160px; /* Mindestbreite, bevor es umbricht oder schrumpft */
     }
 
     .premium-badge {
       background: #1d2f86; /* IVDY Blau */
       color: white;
-      padding: 3px 10px;
+      padding: 5px 12px; /* Etwas mehr Padding */
       border-radius: 10px;
       font-size: 0.8rem;
       margin-left: 10px;
+      font-weight: bold; /* Fett für bessere Sichtbarkeit */
     }
 
     /* Medienabfragen für kleinere Bildschirmgrößen */
     @media screen and (max-width: 768px) {
-      .logo {
+      .logo-text {
         font-size: 1.8rem;
       }
-
-      .subtitle {
+      .site-subtitle {
         font-size: 1rem;
       }
-
       .button {
         padding: 12px 24px;
         font-size: 1rem;
       }
-
       .features {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch; /* Features nehmen die volle verfügbare Breite ein */
+        gap: 10px;
       }
-
       .feature {
-        width: 100%; /* Volle Breite bei kleineren Bildschirmen */
-        margin: 5px 0;
+        width: auto; /* Passt sich der Breite des Containers an */
+        margin: 0 10px; /* Seitenabstand für gestapelte Features */
       }
-
-      .loading-icon {
+      .loading-icon-image {
         width: 80px;
         height: 80px;
+      }
+       .promo-main-title {
+        font-size: 1.3rem;
       }
     }
 
     @media screen and (max-width: 480px) {
-      .logo {
+      .screen {
+        padding: 15px; /* Weniger Padding auf sehr kleinen Screens */
+      }
+      .logo-text {
         font-size: 1.5rem;
       }
-
+       .promo-main-title {
+        font-size: 1.2rem;
+      }
       .button {
         padding: 10px 20px;
         font-size: 0.9rem;
+        width: calc(100% - 40px); /* Button nimmt fast die volle Breite ein, mit etwas Rand */
+        max-width: 300px; /* Aber nicht zu breit werden */
       }
-
       .feature {
-        width: 100%;
-        padding: 10px;
+        padding: 15px;
+        margin: 0 5px; /* Weniger Seitenabstand */
       }
-
       .premium-badge {
         font-size: 0.7rem;
+        padding: 4px 8px; /* Kleineres Padding */
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Screen 1: Loading -->
-  <div class="loading-screen active" id="screen1">
-    <img src="IVDY-logo-transparent.png" alt="IVDY Logo" style="width:80px;">
-    <div class="logo">IVDY</div>
-    <div class="subtitle">Ihr persönlicher Blutmonitor</div>
-    <img class="loading-icon" src="monitor-icon.png" alt="Monitor Icon">
-    <p>Wird geladen...</p>
+  <div class="screen active" id="screen1">
+    <img src="ivdy-logo-80.png" alt="IVDY Logo" class="loading-logo-image">
+    <div class="logo-text">IVDY</div>
+    <div class="site-subtitle">Ihr persönlicher Blutmonitor</div>
+    <img class="loading-icon-image" src="monitor-icon-100.png" alt="Monitor Icon">
+    <p class="loading-message">Wird geladen...</p>
   </div>
 
-  <!-- Screen 2: Promo -->
-  <div class="promo-screen" id="screen2">
-    <div style="display:flex; align-items:center; justify-content:center;">
-      <div class="logo">IVDY</div>
+  <div class="screen" id="screen2">
+    <div class="promo-header">
+      <div class="logo-text">IVDY</div>
       <div class="premium-badge">Premium</div>
     </div>
-    <img src="runner.png" alt="Runner" style="width:90%; max-width:400px; border-radius:15px; margin-top:20px;">
-    <h2 style="padding: 0 10px;">Erhalten Sie uneingeschränkten Zugriff auf alle Funktionen</h2>
+    <picture>
+      <source srcset="runner-400.webp" type="image/webp"> <source srcset="runner-400.jpg" type="image/jpeg"> <img src="runner-400.jpg" alt="Runner" class="promo-image-runner" loading="lazy" decoding="async">
+    </picture>
+    <h2 class="promo-main-title">Erhalten Sie uneingeschränkten Zugriff auf alle Funktionen</h2>
 
     <div class="features">
       <div class="feature">KI-gestützte Bluttest-Analyse</div>
@@ -171,16 +235,28 @@
       <div class="feature">Fernüberwachung von Vitalparametern</div>
     </div>
 
-    <p style="font-size:0.9rem; color:#666;">Nur 29 €/WOCHE, automatisch erneuert</p>
+    <p class="promo-price-details">Nur 29 €/WOCHE, automatisch erneuert</p>
     <a href="https://buy.stripe.com/cN23fl6G9gxTbw48xo" class="button" target="_blank">IVDY CheckUp Starten</a>
   </div>
 
   <script>
-    // Automatischer Wechsel nach 3 Sekunden zu Promo
-    setTimeout(() => {
-      document.getElementById("screen1").classList.remove("active");
-      document.getElementById("screen2").classList.add("active");
-    }, 3000);
+    // Sicherstellen, dass das DOM vollständig geladen ist, bevor das Skript ausgeführt wird
+    document.addEventListener('DOMContentLoaded', function() {
+      const screen1 = document.getElementById("screen1");
+      const screen2 = document.getElementById("screen2");
+
+      // Automatischer Wechsel nach 3 Sekunden zu Promo
+      // Nur ausführen, wenn die Elemente auch wirklich existieren
+      if (screen1 && screen2) {
+        setTimeout(() => {
+          screen1.classList.remove("active");
+          // Optional: screen1.style.display = 'none'; // explizit ausblenden, um sicherzugehen
+          screen2.classList.add("active");
+        }, 3000);
+      } else {
+        console.error("Fehler: Lade- oder Promo-Bildschirm nicht im DOM gefunden.");
+      }
+    });
   </script>
 
 </body>
