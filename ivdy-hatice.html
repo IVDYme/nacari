@@ -134,7 +134,7 @@
             color: var(--text-dunkel);
         }
         
-        .styled-card {
+        .styled-card { 
             background-color: var(--hintergrund-hell);
             padding: 15px;
             border-radius: var(--border-radius-standard);
@@ -202,17 +202,17 @@
              padding-bottom: 5px;
              border-bottom: 1px solid var(--border-farbe);
         }
-        .additional-checks-list { /* UL für die Liste */
+        .additional-checks-list {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between; /* Gleichmäßiger Abstand */
+            justify-content: space-between;
         }
 
-        .additional-checks-list li { /* LI für jedes Element */
-            width: 48%; /* Zwei Elemente pro Zeile (ungefähr) */
+        .additional-checks-list li {
+            width: 48%; 
             margin-bottom: 15px;
             background-color: var(--hintergrund-karte);
             border-radius: var(--border-radius-standard);
@@ -279,8 +279,8 @@
             background-color: var(--hintergrund-karte);
             position: sticky;
             bottom: 0;
-            left: 0;
-            right: 0;
+            left:0;
+            right:0;
         }
         footer.ivdy-footer .nav-item {
             text-align: center;
@@ -296,6 +296,21 @@
         }
         footer.ivdy-footer .nav-item.active {
             color: var(--ivdy-blau);
+        }
+
+        /* Media Query für bessere Responsivität auf sehr kleinen Bildschirmen */
+        @media (max-width: 380px) { /* Etwas höherer Breakpoint für besseren Umbruch */
+            .additional-checks-list li {
+                width: 100%; /* Volle Breite auf sehr kleinen Bildschirmen */
+                margin-bottom: 10px;
+            }
+            .patient-details {
+                flex-wrap: wrap; /* Erlaubt Umbruch der Detail-Items falls nötig */
+            }
+            .patient-details .detail-item {
+                min-width: 70px; /* Mindestbreite für Lesbarkeit */
+                margin-bottom: 10px;
+            }
         }
 
     </style>
@@ -371,7 +386,7 @@
                         <p>Status: <span class="status-text-neutral">Nicht aktiv</span></p>
                         <button type="button">Starten / Konfigurieren</button>
                     </li>
-                </ul>
+                    </ul>
             </section>
 
             <section class="action-buttons">
