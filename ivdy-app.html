@@ -7,13 +7,26 @@
 
   <link rel="icon" href="ivdy-favicon.ico" type="image/x-icon">
   <link rel="preload" href="IVDY-logo-transparent.png" as="image">
-  <link rel="preload" href="IVDY-logo-transparent.png" as="image">
 
   <style>
-    body {
+    :root {
+      --primary-color: #1d2f86;
+      --secondary-color: #5a99e6;
+      --text-color: #333;
+      --bg-color: #f3f6fb;
+      --white: #fff;
+      --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: Arial, sans-serif;
-      background: #f3f6fb;
+      background: var(--bg-color);
       color: #111;
       text-align: center;
       -webkit-font-smoothing: antialiased;
@@ -27,41 +40,27 @@
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
-      box-sizing: border-box;
     }
 
     .screen.active {
       display: flex;
     }
 
-    .loading-logo-image {
-      width: 80px;
-      height: auto;
-    }
-
     .logo-text {
       font-size: 2rem;
       font-weight: bold;
-      color: #1d2f86;
+      color: var(--primary-color);
       margin-top: 10px;
     }
 
-    .site-subtitle {
-      font-size: 1.2rem;
-      color: #333;
-      margin: 10px 0;
-    }
-
-    .loading-icon-image {
-      width: 100px;
-      height: 100px;
-      margin: 30px 0 10px;
-    }
-
-    .loading-message {
-      margin-top: 10px;
-      font-size: 1rem;
-      color: #555;
+    .premium-badge {
+      background: var(--primary-color);
+      color: var(--white);
+      padding: 5px 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      margin-left: 10px;
+      font-weight: bold;
     }
 
     .promo-header {
@@ -75,19 +74,16 @@
       width: 90%;
       max-width: 400px;
       border-radius: 15px;
-      margin-top: 20px;
+      margin: 20px auto 0;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
       background-color: #eee;
     }
 
     .promo-main-title {
       padding: 0 10px;
       font-size: 1.5rem;
-      margin-top: 25px;
-      margin-bottom: 20px;
-      color: #1d2f86;
+      margin: 25px 0 20px;
+      color: var(--primary-color);
     }
 
     .promo-price-details {
@@ -97,8 +93,8 @@
     }
 
     .button {
-      background: linear-gradient(to bottom, #1d2f86, #5a99e6);
-      color: white;
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+      color: var(--white);
       font-weight: bold;
       padding: 15px 30px;
       border-radius: 10px;
@@ -120,42 +116,31 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin: 20px auto;
       gap: 15px;
       max-width: 600px;
+      margin: 20px auto;
     }
 
     .feature {
-      background: white;
+      background: var(--white);
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow);
       padding: 20px;
-      margin: 0;
       width: 180px;
       text-align: center;
       font-size: 0.95rem;
-      color: #333;
+      color: var(--text-color);
       flex-grow: 1;
       min-width: 160px;
     }
 
-    .premium-badge {
-      background: #1d2f86;
-      color: white;
-      padding: 5px 12px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      margin-left: 10px;
-      font-weight: bold;
-    }
-
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
       .logo-text {
         font-size: 1.8rem;
       }
 
-      .site-subtitle {
-        font-size: 1rem;
+      .promo-main-title {
+        font-size: 1.3rem;
       }
 
       .button {
@@ -173,18 +158,9 @@
         width: auto;
         margin: 0 10px;
       }
-
-      .loading-icon-image {
-        width: 80px;
-        height: 80px;
-      }
-
-      .promo-main-title {
-        font-size: 1.3rem;
-      }
     }
 
-    @media screen and (max-width: 480px) {
+    @media (max-width: 480px) {
       .screen {
         padding: 15px;
       }
@@ -218,15 +194,7 @@
 </head>
 <body>
 
-  <div class="screen active" id="screen1">
-    <img src="IVDY-logo-transparent.png" alt="IVDY Logo" class="loading-logo-image">
-    <div class="logo-text">IVDY</div>
-    <div class="site-subtitle">Ihr persönlicher Blutmonitor</div>
-    <img class="loading-icon-image" src="IVDY-logo-transparent.png" alt="Monitor Icon">
-    <p class="loading-message">Wird geladen...</p>
-  </div>
-
-  <div class="screen" id="screen2">
+  <div class="screen active" id="screen2">
     <div class="promo-header">
       <div class="logo-text">IVDY</div>
       <div class="premium-badge">Premium</div>
@@ -251,16 +219,12 @@
     <a href="https://buy.stripe.com/cN23fl6G9gxTbw48xo" class="button" target="_blank">IVDY CheckUp Starten</a>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const screen1 = document.getElementById("screen1");
-      const screen2 = document.getElementById("screen2");
+  <!-- Optional: Entfernt, da screen1 nicht verwendet wird -->
+  <!-- <div class="screen" id="screen1"> ... </div> -->
 
-      setTimeout(function () {
-        screen1.classList.remove("active");
-        screen2.classList.add("active");
-      }, 3000); // Wechsel nach 3 Sekunden
-    });
+  <script>
+    // Entfernt, da es screen1 betrifft, das im Code nicht vorhanden ist
+    // Wenn du einen Ladescreen einbauen willst, kann ich diesen Abschnitt reaktivieren
   </script>
 
 </body>
