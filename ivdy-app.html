@@ -37,7 +37,7 @@
       display: none;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: center; /* Hauptausrichtung bleibt zentriert */
       min-height: 100vh;
       padding: 20px;
     }
@@ -46,11 +46,19 @@
       display: flex;
     }
 
-    .logo-text {
+    /* Header-Styling bleibt wie es war */
+    .promo-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .logo-text { /* IVDY Text-Logo im Header */
       font-size: 2rem;
       font-weight: bold;
       color: var(--primary-color);
-      margin-top: 10px;
+      margin-top: 10px; /* Beibehalten oder anpassen nach Geschmack */
     }
 
     .premium-badge {
@@ -59,15 +67,8 @@
       padding: 5px 12px;
       border-radius: 10px;
       font-size: 0.8rem;
-      margin-left: 10px;
+      margin-left: 10px; /* Abstand zum Text-Logo */
       font-weight: bold;
-    }
-
-    .promo-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 15px;
     }
 
     .promo-image-runner {
@@ -134,29 +135,42 @@
       min-width: 160px;
     }
 
+    /* Styling für das Logo, das unten angezeigt wird */
+    .footer-logo-container {
+      margin-top: 40px;  /* Abstand nach oben zum Button */
+      margin-bottom: 20px; /* Etwas Platz am Ende der Seite */
+    }
+
+    .footer-logo-image {
+      height: 50px; /* Beispiel: Höhe des Logos anpassen nach Bedarf */
+      /* width: auto; */ /* Behält das Seitenverhältnis bei */
+      /* max-width: 180px; */ /* Beispiel: Maximale Breite, falls es zu groß wird */
+      opacity: 0.8; /* Optional: Etwas dezenter, da es nicht im Header ist */
+    }
+
+
     @media (max-width: 768px) {
       .logo-text {
         font-size: 1.8rem;
       }
-
       .promo-main-title {
         font-size: 1.3rem;
       }
-
       .button {
         padding: 12px 24px;
         font-size: 1rem;
       }
-
       .features {
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
       }
-
       .feature {
         width: auto;
         margin: 0 10px;
+      }
+      .footer-logo-image {
+        height: 40px;
       }
     }
 
@@ -164,30 +178,31 @@
       .screen {
         padding: 15px;
       }
-
       .logo-text {
         font-size: 1.5rem;
       }
-
       .promo-main-title {
         font-size: 1.2rem;
       }
-
       .button {
         padding: 10px 20px;
         font-size: 0.9rem;
         width: calc(100% - 40px);
         max-width: 300px;
       }
-
       .feature {
         padding: 15px;
         margin: 0 5px;
       }
-
       .premium-badge {
         font-size: 0.7rem;
         padding: 4px 8px;
+      }
+      .footer-logo-container {
+        margin-top: 30px;
+      }
+      .footer-logo-image {
+        height: 35px;
       }
     }
   </style>
@@ -196,15 +211,12 @@
 
   <div class="screen active" id="screen2">
     <div class="promo-header">
-      <div class="logo-text">IVDY</div>
-      <div class="premium-badge">Premium</div>
+      <div class="logo-text">IVDY</div> <div class="premium-badge">Premium</div>
     </div>
 
-    <picture>
-      <source srcset="runner-400.webp" type="image/webp">
-      <source srcset="runner-400.jpg" type="image/jpeg">
-      <img src="runner-400.jpg" alt="Runner" class="promo-image-runner" loading="lazy" decoding="async">
-    </picture>
+      <div class="footer-logo-container">
+      <img src="IVDY-logo-transparent.png" alt="IVDY Logo unten" class="footer-logo-image">
+    </div>
 
     <h2 class="promo-main-title">Erhalten Sie uneingeschränkten Zugriff auf alle Funktionen</h2>
 
@@ -217,14 +229,14 @@
 
     <p class="promo-price-details">Nur 29 €/WOCHE, automatisch erneuert</p>
     <a href="https://buy.stripe.com/cN23fl6G9gxTbw48xo" class="button" target="_blank">IVDY CheckUp Starten</a>
+
+    <div class="footer-logo-container">
+      <img src="IVDY-logo-transparent.png" alt="IVDY Logo unten" class="footer-logo-image">
+    </div>
   </div>
 
-  <!-- Optional: Entfernt, da screen1 nicht verwendet wird -->
-  <!-- <div class="screen" id="screen1"> ... </div> -->
-
   <script>
-    // Entfernt, da es screen1 betrifft, das im Code nicht vorhanden ist
-    // Wenn du einen Ladescreen einbauen willst, kann ich diesen Abschnitt reaktivieren
+    // Kein spezifisches JavaScript für die Logo-Anzeige benötigt
   </script>
 
 </body>
