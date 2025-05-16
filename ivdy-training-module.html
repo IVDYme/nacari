@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>IVDY Training Program Modules</title>
+    <title>IVDY Weiterbildungsprogramm</title>
     <link rel="icon" href="ivdy-favicon.ico" type="image/x-icon" />
     <link rel="preload" href="IVDY-logo-transparent.png" as="image" />
     <style>
@@ -162,8 +162,7 @@
             <li>Preis: 5900 €</li>
         </ul>
         <button id="registerBtnDe">Jetzt anmelden</button>
-        <button id="addToCartDe">In den Warenkorb</button>
-    </section>
+        </section>
 
     <section data-lang="en" class="hidden">
         <h2>6-Week Virtual Module</h2>
@@ -174,8 +173,7 @@
             <li>Price: €5900</li>
         </ul>
         <button id="registerBtnEn">Register Now</button>
-        <button id="addToCartEn">Add to Cart</button>
-    </section>
+         </section>
 
     <section data-lang="de" style="margin-top: 40px;">
         <h2>Nehmen Sie an unserem exklusiven IVDY Trainingsprogramm teil</h2>
@@ -244,7 +242,10 @@
                 📅 <strong>Datum:</strong> Anmeldung schließt am 31. Mai 2025
             </p>
 
-            <p>📨 <strong>Anmeldung & Info:</strong> [insert contact details or link]</p>
+            <p>📨 <strong>Anmeldung & Info:</strong><a href="https://buy.stripe.com/6oU7sK6iV9AUcvE6pScV20Y" target="_blank" style="color:#072FA0; text-decoration:none; font-weight:bold; font-family:Arial, sans-serif;">
+  JETZT ANMELDEN
+</a>
+</p>
 
             <p><span class="note-red">Bitte beachten Sie:</span> Das Hinzufügen eines Programms zum Warenkorb reserviert Ihren Platz nicht. Die vollständige Zahlung ist für die Registrierung in einem Programm erforderlich.</p>
         </div>
@@ -316,9 +317,11 @@
                 May 31, 2025
             </p>
 
-            <p>📨 <strong>Registration & Info:</strong> [insert contact details or link]</p>
+            <p>📨 <strong>Registration & Info:</strong> <a href="https://buy.stripe.com/6oU7sK6iV9AUcvE6pScV20Y" target="_blank" style="color:#072FA0; text-decoration:none; font-weight:bold; font-family:Arial, sans-serif;">
+  REGISTER NOW
+</a></p>
 
-            <p><span class="note-red">Please read (note in red):</span> Adding a program to your cart does not reserve your seat. Full payment is required to be registered in a program.</p>
+            <p><span class="note-red">Please read:</span> Adding a program to your cart does not reserve your seat. Full payment is required to be registered in a program.</p>
         </div>
     </section>
 
@@ -379,30 +382,18 @@
     const registerBtnDe = document.getElementById('registerBtnDe');
     if(registerBtnDe) {
        registerBtnDe.addEventListener('click', () => {
-           alert('Danke für Ihre Anmeldung zum IVDY CheckUp!');
+           alert('Danke für Ihre Anmeldung zum IVDY Weiterbildungsprogramm!');
        });
     }
 
      const registerBtnEn = document.getElementById('registerBtnEn');
      if(registerBtnEn) {
         registerBtnEn.addEventListener('click', () => {
-            alert('Thank you for registering for IVDY CheckUp!');
+            alert('Thank you for registering for the IVDY Training Program!');
         });
      }
 
-    const addToCartDe = document.getElementById('addToCartDe');
-    if(addToCartDe) {
-       addToCartDe.addEventListener('click', () => {
-           alert('Der Kurs wurde zum Warenkorb hinzugefügt.');
-       });
-    }
-
-    const addToCartEn = document.getElementById('addToCartEn');
-     if(addToCartEn) {
-        addToCartEn.addEventListener('click', () => {
-            alert('Course added to cart.');
-        });
-     }
+    // Removed Add to Cart buttons, so no need for their event listeners
 </script>
 
 </body>
