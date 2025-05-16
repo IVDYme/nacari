@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IVDY Remote Checkup – Lehrgang</title>
-
   <link rel="icon" href="ivdy-favicon.ico" type="image/x-icon" />
-  <link rel="preload" href="IVDY-logo-transparent.png" as="image" />
-
   <style>
     :root {
       --primary-color: #1d2f86;
@@ -34,6 +31,7 @@
       padding: 1.5rem 1rem;
       text-align: center;
       box-shadow: var(--shadow);
+      position: relative;
     }
 
     header img {
@@ -45,6 +43,22 @@
       margin: 0.5rem 0 0;
       font-weight: 700;
       font-size: 1.8rem;
+    }
+
+    .language-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .language-toggle button {
+      background: transparent;
+      border: none;
+      color: var(--white);
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.5rem;
     }
 
     main {
@@ -76,7 +90,7 @@
     .price {
       font-weight: 700;
       font-size: 1.4rem;
-      color: var(--secondary-color);
+      color: var(--ivdy-red);
       margin-top: 1rem;
     }
 
@@ -101,26 +115,25 @@
       background-color: var(--primary-color);
       color: var(--white);
       padding: 1rem;
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-size: 0.9rem;
       box-shadow: var(--shadow);
       margin-top: 3rem;
+      flex-wrap: wrap;
     }
 
     footer a {
-      color: var(--secondary-color);
+      color: var(--white);
       text-decoration: none;
       margin: 0 0.5rem;
       transition: color 0.3s ease;
     }
 
     footer a:hover {
-      color: var(--white);
+      color: var(--secondary-color);
       text-decoration: underline;
-    }
-
-    .footer-content p {
-      margin: 0.2rem 0;
     }
 
     @media (max-width: 600px) {
@@ -128,11 +141,14 @@
         margin: 1rem;
         padding: 1rem;
       }
-    }
 
-    @media (max-width: 480px) {
-      .footer-content p {
-        font-size: 0.8rem;
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      footer div {
+        margin: 0.5rem 0;
       }
     }
   </style>
@@ -140,16 +156,23 @@
 <body>
 
 <header>
+  <div class="language-toggle">
+    <button onclick="setLanguage('de')">DE</button> |
+    <button onclick="setLanguage('en')">EN</button>
+  </div>
   <img src="IVDY-logo-transparent.png" alt="IVDY Logo" />
-  <h1>IVDY Remote Checkup Lehrgang</h1>
+  <h1 id="title">IVDY Remote Checkup Lehrgang</h1>
 </header>
 
 <main>
-  <h2>Entwickle deine Zukunft im Gesundheitswesen mit KI</h2>
-  <p>Unser 6-wöchiger virtueller Lehrgang in Deutsch und Englisch bietet eine großartige Gelegenheit, das medizinische Netzwerk von IVDY kennenzulernen und viele neue Geschäftsbeziehungen aufzubauen.</p>
+  <h2 id="subtitle">Entwickle deine Zukunft im Gesundheitswesen mit KI</h2>
+  <p id="intro">
+    Unser 6-wöchiger virtueller Lehrgang in Deutsch und Englisch bietet eine großartige Gelegenheit,
+    das medizinische Netzwerk von IVDY kennenzulernen und viele neue Geschäftsbeziehungen aufzubauen.
+  </p>
 
-  <h3>Programmübersicht</h3>
-  <ul>
+  <h3 id="program">Programmübersicht</h3>
+  <ul id="program-list">
     <li>Virtuelles Format: flexibel von überall teilnehmen</li>
     <li>Dauer: 6 Wochen</li>
     <li>Sprachen: Deutsch / Englisch</li>
@@ -157,16 +180,16 @@
     <li>Intensives Networking & Business Development</li>
   </ul>
 
-  <h3>Für wen ist der Lehrgang geeignet?</h3>
-  <ul>
+  <h3 id="target">Für wen ist der Lehrgang geeignet?</h3>
+  <ul id="target-list">
     <li>Ärzte und medizinische Fachkräfte</li>
     <li>Management von Kliniken und Arztpraxen</li>
     <li>HealthTech-Entrepreneure und Startups</li>
     <li>Führungskräfte und Entscheidungsträger im Gesundheitswesen</li>
   </ul>
 
-  <h3>Inhalte (Auszug)</h3>
-  <ul>
+  <h3 id="content">Inhalte (Auszug)</h3>
+  <ul id="content-list">
     <li>Grundlagen generativer KI und Machine Learning</li>
     <li>Rechtliche und ethische Aspekte in der KI-Anwendung</li>
     <li>Integration von KI in Marketing, Projektmanagement & Sales</li>
@@ -174,19 +197,97 @@
     <li>Führungskompetenzen für das digitale Gesundheitswesen</li>
   </ul>
 
-  <a href="#" class="button">Jetzt anmelden</a>
+  <a href="https://buy.stripe.com/6oU7sK6iV9AUcvE6pScV20Y" class="button" id="register-button">Jetzt anmelden</a>
 </main>
 
 <footer>
-  <div class="footer-content">
-    <p>&copy; 2025 IVDY – Alle Rechte vorbehalten.</p>
-    <p>
-      <a href="impressum.html">Impressum</a> |
-      <a href="agb.html">AGB</a> |
-      <a href="datenschutz.html">Datenschutz</a>
-    </p>
+  <div id="footer-left">2025 IVDY – Alle Rechte vorbehalten.</div>
+  <div>
+    <a href="impressum.html">Impressum</a>
+    <a href="agb.html">AGB</a>
+    <a href="datenschutz.html">Datenschutz</a>
   </div>
 </footer>
+
+<script>
+  const translations = {
+    de: {
+      title: "IVDY Remote Checkup Lehrgang",
+      subtitle: "Entwickle deine Zukunft im Gesundheitswesen mit KI",
+      intro: "Unser 6-wöchiger virtueller Lehrgang in Deutsch und Englisch bietet eine großartige Gelegenheit, das medizinische Netzwerk von IVDY kennenzulernen und viele neue Geschäftsbeziehungen aufzubauen.",
+      program: "Programmübersicht",
+      programList: [
+        "Virtuelles Format: flexibel von überall teilnehmen",
+        "Dauer: 6 Wochen",
+        "Sprachen: Deutsch / Englisch",
+        "Preis: <span class='price'>€5.900</span>",
+        "Intensives Networking & Business Development"
+      ],
+      target: "Für wen ist der Lehrgang geeignet?",
+      targetList: [
+        "Ärzte und medizinische Fachkräfte",
+        "Management von Kliniken und Arztpraxen",
+        "HealthTech-Entrepreneure und Startups",
+        "Führungskräfte und Entscheidungsträger im Gesundheitswesen"
+      ],
+      content: "Inhalte (Auszug)",
+      contentList: [
+        "Grundlagen generativer KI und Machine Learning",
+        "Rechtliche und ethische Aspekte in der KI-Anwendung",
+        "Integration von KI in Marketing, Projektmanagement & Sales",
+        "Datenanalyse und Business Development im Medizinbereich",
+        "Führungskompetenzen für das digitale Gesundheitswesen"
+      ],
+      registerButton: "Jetzt anmelden",
+      footer: "2025 IVDY – Alle Rechte vorbehalten."
+    },
+    en: {
+      title: "IVDY Remote Checkup Program",
+      subtitle: "Shape the future of healthcare with AI",
+      intro: "Our 6-week virtual program in German and English offers a great opportunity to get to know IVDY’s medical network and build many new business relationships.",
+      program: "Program Overview",
+      programList: [
+        "Virtual format: join flexibly from anywhere",
+        "Duration: 6 weeks",
+        "Languages: German / English",
+        "Price: <span class='price'>€5.900</span>",
+        "Intensive Networking & Business Development"
+      ],
+      target: "Who is this program for?",
+      targetList: [
+        "Doctors and medical professionals",
+        "Clinic and practice managers",
+        "HealthTech entrepreneurs and startups",
+        "Executives and decision-makers in healthcare"
+      ],
+      content: "Topics (excerpt)",
+      contentList: [
+        "Fundamentals of Generative AI and Machine Learning",
+        "Legal and ethical aspects of AI use",
+        "Integrating AI in marketing, project management & sales",
+        "Data analysis and business development in medicine",
+        "Leadership skills for digital healthcare"
+      ],
+      registerButton: "Register now",
+      footer: "2025 IVDY – All rights reserved."
+    }
+  };
+
+  function setLanguage(lang) {
+    const t = translations[lang];
+    document.getElementById("title").innerHTML = t.title;
+    document.getElementById("subtitle").innerHTML = t.subtitle;
+    document.getElementById("intro").innerHTML = t.intro;
+    document.getElementById("program").innerHTML = t.program;
+    document.getElementById("program-list").innerHTML = t.programList.map(i => `<li>${i}</li>`).join("");
+    document.getElementById("target").innerHTML = t.target;
+    document.getElementById("target-list").innerHTML = t.targetList.map(i => `<li>${i}</li>`).join("");
+    document.getElementById("content").innerHTML = t.content;
+    document.getElementById("content-list").innerHTML = t.contentList.map(i => `<li>${i}</li>`).join("");
+    document.getElementById("register-button").innerHTML = t.registerButton;
+    document.getElementById("footer-left").innerHTML = t.footer;
+  }
+</script>
 
 </body>
 </html>
