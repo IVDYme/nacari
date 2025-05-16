@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IVDY Training Program Modules</title>
+    <link rel="icon" href="ivdy-favicon.ico" type="image/x-icon" />
+    <link rel="preload" href="IVDY-logo-transparent.png" as="image" />
+    <style>
+        :root {
+            --primary-color: #1d2f86;
+            --secondary-color: #5a99e6;
+            --text-color: #333;
+            --bg-color: #f3f6fb;
+            --white: #fff;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        main {
+            max-width: 1200px; /* Increased max-width for modules */
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h1, h2 {
+            color: var(--primary-color);
+        }
+         h3 { /* Style for module titles */
+            color: var(--primary-color);
+         }
+        button, .btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            margin: 10px 5px 0 0;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s ease;
+        }
+        button:hover, .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        .language-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary-color);
+            border-radius: 4px;
+            padding: 6px 12px;
+            color: var(--white);
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: var(--shadow);
+            user-select: none;
+            z-index: 100; /* Ensure it's above other content */
+        }
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none;
+        }
+
+        /* Styles for the modules */
+        .module-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 boxes per row */
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .module {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--white); /* Use white for module background */
+            box-shadow: var(--shadow); /* Add shadow to modules */
+            display: flex;
+            flex-direction: column;
+        }
+        .module h3 {
+            margin-top: 0;
+            color: var(--primary-color); /* Use primary color for module headings */
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .module p {
+            margin-bottom: 0;
+            font-size: 0.95em;
+            flex-grow: 1;
+            color: var(--text-color); /* Ensure text color is consistent */
+        }
+        .module strong {
+             color: var(--primary-color); /* Use primary color for strong text in modules */
+        }
+        .note-red {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 992px) { /* Adjust breakpoint if needed */
+            .module-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Allow 2 or 3 on medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+             main {
+                max-width: 100%; /* Allow main to take full width on smaller screens */
+             }
+            .module-container {
+                grid-template-columns: 1fr; /* Stack boxes on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 data-lang="de">IVDY Remote CheckUp</h1>
+    <h1 data-lang="en" class="hidden">IVDY Remote CheckUp</h1>
+</header>
+
+<div class="language-toggle" id="langToggle">English</div>
+
+<main>
+    <section data-lang="de">
+        <h2>6 Wochen virtueller Kurs</h2>
+        <p>Ein intensives Modul zur Verbesserung Ihrer Kenntnisse und zum Aufbau eines starken medizinischen Netzwerks.</p>
+        <ul>
+            <li>Online & flexibel</li>
+            <li>Networking & Geschäftsentwicklung</li>
+            <li>Preis: 5900 €</li>
+        </ul>
+        <button id="registerBtnDe">Jetzt anmelden</button>
+        <button id="addToCartDe">In den Warenkorb</button>
+    </section>
+
+    <section data-lang="en" class="hidden">
+        <h2>6-Week Virtual Module</h2>
+        <p>An intensive course to improve your knowledge and build a strong medical network.</p>
+        <ul>
+            <li>Online & Flexible</li>
+            <li>Networking & Business Development</li>
+            <li>Price: €5900</li>
+        </ul>
+        <button id="registerBtnEn">Register Now</button>
+        <button id="addToCartEn">Add to Cart</button>
+    </section>
+
+    <section data-lang="de" style="margin-top: 40px;">
+        <h2>Nehmen Sie an unserem exklusiven IVDY Trainingsprogramm teil</h2>
+        <p>Befähigung von Führungskräften im Medizin- und Geschäftsbereich im Zeitalter der KI</p>
+        <p>Wir freuen uns, Sie zu unserem bevorstehenden IVDY Trainingskurs einzuladen, einer einzigartigen Gelegenheit zu erfahren, wie KI, Daten und Innovation strategisch in Gesundheitswesen und Geschäftsumgebungen integriert werden können.</p>
+        <p>Was Sie erwartet:</p>
+        <p>Unser modulares Programm ist von führenden KI-Strategien inspiriert und beinhaltet:</p>
+
+        <h3>Die IVDY® MODULE</h3>
+
+        <div class="module-container">
+            <div class="module">
+                <h3><strong>1. Verständnis Digitale Patientenakte</strong></h3>
+                <p>Entdecke die Grundlagen und Tools der digitalen Patientenakte, lerne, wie man sie strategisch einsetzt und den aktuellen Stand der Technologie bewertet. Basiert auf der zentralen Funktion von IVDY als digitale Patientenakte zur Speicherung und Verwaltung medizinisch relevanter Daten an einem Ort.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>2. Innovation & Daten-Grundlagen</strong></h3>
+                <p>Tauche tiefer in die Geheimnisse des Echtzeit-Datenaustauschs und der Datenstandardisierung ein. Verstehe, wie diese Technologien die Vernetzung im Gesundheitswesen revolutionieren. Bezieht sich auf die Kernaspekte von IVDY zur Vernetzung aller Gesundheitsversorger und Standardisierung von Datenformaten für nahtlosen Austausch.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>3. Sicherheit und Recht in der digitalen Gesundheitsversorgung + Praxisteil</strong></h3>
+                <p>Erforsche die rechtlichen Rahmenbedingungen der Datensicherheit und des Datenschutzes in der digitalen Patientenakte. Lerne, wie du bei deinem IVDY-Projekt rechtssicher gestaltest und sensible medizinische Daten schützt.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>4. Integration von IVDY in Praxis & Klinik + Praxisteil</strong></h3>
+                <p>Sieh, wie die Implementierung und Anbindung an IVDY funktioniert, von der Strategieberatung bis zur technischen Umsetzung. Bezieht sich auf die Schritte zur erfolgreichen Umsetzung der Digitalisierung und Vernetzung in der Medizin durch IVDY.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>5. Organisation und Projektmanagement + Praxisteil</strong></h3>
+                <p>Nutze IVDY, um Prozesse im Gesundheitswesen zu verbessern und die Koordination der Behandlung zu optimieren. Basiert auf den Vorteilen des IVDY Systems für Krankenhäuser, wie verbesserte Behandlungskoordination und effiziente Diagnosestellung.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>6. Neuartige Versorgungs- & Managementstrategien durch IVDY + Praxisteil</strong></h3>
+                <p>Optimiere die Patientenversorgung mit IVDY-Tools, um die Qualität der Versorgung zu steigern und die Patientensicherheit zu erhöhen. Bezieht sich auf die übergeordneten Ziele von IVDY zur Verbesserung der Gesundheitsversorgung.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>7. Analytik & Daten Engineering + Praxisteil</strong></h3>
+                <p>Verstehe die Kraft der Datenanalytik und wie du Patientendaten für verbesserte Diagnostik und Vorhersage von Krankheiten einsetzen kannst. Basierend auf der Integration von KI-Technologie zur besseren Diagnostik und Vorhersage von Krankheiten.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>8. Revolution im Dokumenten- & Notizenmanagement + Praxisteil</strong></h3>
+                <p>Lerne, wie du durch digitale Dokumentenverwaltung und die Integration von Notizen medizinische Informationen effizient organisierst und zugänglich machst. Basiert auf den spezifischen IVDY Modulen für Dokumentenmanagement und Notizen.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>9. Intelligentes Management + Praxisteil</strong></h3>
+                <p>Entwickle Managementqualitäten für die digitale Gesundheitsära, manage die Integration neuer Technologien und nutze IVDY für eine verbesserte Patientenkommunikation und -betreuung. Umfasst Aspekte wie verbesserte Patientenkommunikation und patientenzentrierte Betreuung, die IVDY ermöglicht.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <h2>Wer sollte teilnehmen?</h2>
+            <p>Ärzte, Manager im Gesundheitswesen, Digital-Health-Startups, Kliniken und alle, die an der Transformation des Gesundheitswesens durch Technologie interessiert sind.</p>
+
+            <p>Dies ist mehr als ein Training – es ist Ihr Tor zum <strong>IVDY Medizinischen Netzwerk</strong>, wo Innovation auf praxisnahe Zusammenarbeit trifft.</p>
+
+            <p>
+                📍 <strong>Ort:</strong> virtuell, eigenständig, wöchentliche LIVE-Meetings<br>
+                📅 <strong>Datum:</strong> Anmeldung schließt am 31. Mai 2025
+            </p>
+
+            <p>📨 <strong>Anmeldung & Info:</strong> [insert contact details or link]</p>
+
+            <p><span class="note-red">Bitte beachten Sie:</span> Das Hinzufügen eines Programms zum Warenkorb reserviert Ihren Platz nicht. Die vollständige Zahlung ist für die Registrierung in einem Programm erforderlich.</p>
+        </div>
+    </section>
+
+     <section data-lang="en" class="hidden" style="margin-top: 40px;">
+         <h2>Join Our Exclusive IVDY Training Program</h2>
+        <p>Empowering Medical and Business Leaders in the Age of AI</p>
+        <p>We’re excited to invite you to our upcoming IVDY Training Course, a unique opportunity to explore how AI, data, and innovation can be strategically integrated into healthcare and business environments.</p>
+        <p>What to Expect:</p>
+        <p>Our modular program is inspired by leading AI strategies and includes:</p>
+
+        <h3>The IVDY® MODULES</h3>
+         <div class="module-container">
+             <div class="module">
+                 <h3><strong>1. Understanding the Digital Patient File</strong></h3>
+                 <p>Discover the fundamentals and tools of the digital patient file, learn how to use it strategically and evaluate the current state of technology. Based on IVDY's central function as a digital patient file for storing and managing medically relevant data in one place.</p>
+             </div>
+              <div class="module">
+                <h3><strong>2. Innovation & Data Foundations</strong></h3>
+                <p>Dive deeper into the secrets of real-time data exchange and data standardization. Understand how these technologies are revolutionizing networking in healthcare. Relates to the core aspects of IVDY for connecting all healthcare providers and standardizing data formats for seamless exchange.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>3. Security and Law in Digital Healthcare + Practical Part</strong></h3>
+                <p>Explore the legal framework for data security and data protection in the digital patient file. Learn how to design your IVDY project legally compliant and protect sensitive medical data.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>4. Integration of IVDY in Practice & Clinic + Practical Part</strong></h3>
+                <p>See how the implementation and connection to IVDY works, from strategic consulting to technical implementation. Refers to the steps for successful digitalization and networking in medicine through IVDY.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>5. Organization and Project Management + Practical Part</strong></h3>
+                <p>Use IVDY to improve processes in healthcare and optimize treatment coordination. Based on the benefits of the IVDY system for hospitals, such as improved treatment coordination and efficient diagnostics.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>6. Novel Care & Management Strategies through IVDY + Practical Part</strong></h3>
+                <p>Optimize patient care with IVDY tools to increase the quality of care and improve patient safety. Relates to IVDY's overarching goals to improve healthcare.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>7. Analytics & Data Engineering + Practical Part</strong></h3>
+                <p>Understand the power of data analytics and how you can use patient data for improved diagnostics and prediction of diseases. Based on the integration of AI technology for better diagnostics and prediction of diseases.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>8. Revolution in Document & Notes Management + Practical Part</strong></h3>
+                <p>Learn how to efficiently organize and make medical information accessible through digital document management and the integration of notes. Based on the specific IVDY modules for document management and notes.</p>
+            </div>
+
+            <div class="module">
+                <h3><strong>9. Intelligent Management + Practical Part</strong></h3>
+                <p>Develop management skills for the digital healthcare era, manage the integration of new technologies, and use IVDY for improved patient communication and care. Includes aspects such as improved patient communication and patient-centered care enabled by IVDY.</p>
+            </div>
+         </div>
+
+         <div style="margin-top: 30px;">
+            <h2>Who Should Join?</h2>
+            <p>Doctors, healthcare managers, digital health startups, clinics, and anyone interested in transforming healthcare through technology.</p>
+
+            <p>This is more than a training — it’s your gateway into the <strong>IVDY Medical Network</strong>, where innovation meets real-world collaboration.</p>
+
+            <p>
+                📍 <strong>Location:</strong> virtual, self-paced, weekly LIVE meetings<br>
+                📅 <strong>Date:</strong> next Registration Closes On<br>
+                May 31, 2025
+            </p>
+
+            <p>📨 <strong>Registration & Info:</strong> [insert contact details or link]</p>
+
+            <p><span class="note-red">Please read (note in red):</span> Adding a program to your cart does not reserve your seat. Full payment is required to be registered in a program.</p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-content">
+        <p data-lang="de">&copy; 2025 IVDY – Alle Rechte vorbehalten.</p>
+        <p data-lang="en" class="hidden">&copy; 2025 IVDY – All rights reserved.</p>
+        <p>
+            <a href="impressum.html" aria-label="Impressum" data-lang="de">Impressum</a>
+            <a href="impressum.html" aria-label="Imprint" data-lang="en" class="hidden">Imprint</a> |
+            <a href="agb.html" aria-label="AGB" data-lang="de">AGB</a>
+            <a href="agb.html" aria-label="Terms and Conditions" data-lang="en" class="hidden">Terms and Conditions</a> |
+            <a href="datenschutz.html" aria-label="Datenschutz" data-lang="de">Datenschutz</a>
+             <a href="datenschutz.html" aria-label="Privacy Policy" data-lang="en" class="hidden">Privacy Policy</a>
+        </p>
+    </div>
+</footer>
+
+<script>
+    const langToggle = document.getElementById('langToggle');
+    // Select all elements that have a data-lang attribute
+    const langElements = document.querySelectorAll('[data-lang]');
+
+    function setLanguage(lang) {
+        langElements.forEach(el => {
+            if (el.getAttribute('data-lang') === lang) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+
+        if (lang === 'en') {
+            langToggle.textContent = 'Deutsch';
+            document.documentElement.lang = 'en';
+        } else {
+            langToggle.textContent = 'English';
+            document.documentElement.lang = 'de';
+        }
+    }
+
+    langToggle.addEventListener('click', () => {
+        if (document.documentElement.lang === 'de') {
+            setLanguage('en');
+        } else {
+            setLanguage('de');
+        }
+    });
+
+    // Default Language Deutsch setzen
+    // Check local storage or browser language preference could be added here
+    setLanguage('de');
+
+    // Beispiel: Event Listener für Buttons (nur Demo)
+    // These selectors need to be updated if IDs change or become language-specific
+    const registerBtnDe = document.getElementById('registerBtnDe');
+    if(registerBtnDe) {
+       registerBtnDe.addEventListener('click', () => {
+           alert('Danke für Ihre Anmeldung zum IVDY CheckUp!');
+       });
+    }
+
+     const registerBtnEn = document.getElementById('registerBtnEn');
+     if(registerBtnEn) {
+        registerBtnEn.addEventListener('click', () => {
+            alert('Thank you for registering for IVDY CheckUp!');
+        });
+     }
+
+    const addToCartDe = document.getElementById('addToCartDe');
+    if(addToCartDe) {
+       addToCartDe.addEventListener('click', () => {
+           alert('Der Kurs wurde zum Warenkorb hinzugefügt.');
+       });
+    }
+
+    const addToCartEn = document.getElementById('addToCartEn');
+     if(addToCartEn) {
+        addToCartEn.addEventListener('click', () => {
+            alert('Course added to cart.');
+        });
+     }
+</script>
+
+</body>
+</html>
