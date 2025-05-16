@@ -3,182 +3,190 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IVDY Remote Checkup</title>
+  <title>IVDY Remote Checkup – Lehrgang</title>
+
   <link rel="icon" href="ivdy-favicon.ico" type="image/x-icon" />
   <link rel="preload" href="IVDY-logo-transparent.png" as="image" />
+
   <style>
     :root {
       --primary-color: #1d2f86;
       --secondary-color: #5a99e6;
+      --ivdy-red: #ff1e00;
       --text-color: #333;
       --bg-color: #f3f6fb;
       --white: #fff;
       --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
       margin: 0;
-      padding: 0;
+      background-color: var(--bg-color);
+      font-family: var(--font-family);
+      color: var(--text-color);
+      line-height: 1.6;
     }
+
     header {
       background-color: var(--primary-color);
       color: var(--white);
-      padding: 20px;
+      padding: 1.5rem 1rem;
       text-align: center;
       box-shadow: var(--shadow);
     }
+
+    header img {
+      max-height: 50px;
+      vertical-align: middle;
+    }
+
+    header h1 {
+      margin: 0.5rem 0 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
     main {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 0 20px;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
     }
-    h1, h2 {
+
+    h2 {
       color: var(--primary-color);
+      margin-top: 0;
     }
-    button, .btn {
-      background-color: var(--primary-color);
+
+    p {
+      margin: 1rem 0;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .price {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--secondary-color);
+      margin-top: 1rem;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: var(--ivdy-red);
       color: var(--white);
-      border: none;
-      padding: 12px 24px;
-      margin: 10px 5px 0 0;
-      cursor: pointer;
-      font-size: 1rem;
-      border-radius: 4px;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 2rem;
       box-shadow: var(--shadow);
       transition: background-color 0.3s ease;
     }
-    button:hover, .btn:hover {
-      background-color: var(--secondary-color);
+
+    .button:hover {
+      background-color: #cc1800;
     }
-    .language-toggle {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      background: var(--secondary-color);
-      border-radius: 4px;
-      padding: 6px 12px;
-      color: var(--white);
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: var(--shadow);
-      user-select: none;
-    }
+
     footer {
       background-color: var(--primary-color);
       color: var(--white);
-      padding: 20px 0;
+      padding: 1rem;
       text-align: center;
       font-size: 0.9rem;
       box-shadow: var(--shadow);
-      margin-top: 40px;
+      margin-top: 3rem;
     }
+
     footer a {
       color: var(--secondary-color);
       text-decoration: none;
-      margin: 0 8px;
+      margin: 0 0.5rem;
+      transition: color 0.3s ease;
     }
+
     footer a:hover {
+      color: var(--white);
       text-decoration: underline;
     }
-    .hidden {
-      display: none;
+
+    .footer-content p {
+      margin: 0.2rem 0;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin: 1rem;
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-content p {
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1 data-lang="de">IVDY Remote CheckUp</h1>
-  <h1 data-lang="en" class="hidden">IVDY Remote CheckUp</h1>
+  <img src="IVDY-logo-transparent.png" alt="IVDY Logo" />
+  <h1>IVDY Remote Checkup Lehrgang</h1>
 </header>
 
-<div class="language-toggle" id="langToggle">English</div>
-
 <main>
-  <!-- Deutsch Inhalt -->
-  <section data-lang="de">
-    <h2>6 Wochen virtueller Kurs</h2>
-    <p>Ein intensives Modul zur Verbesserung Ihrer Kenntnisse und zum Aufbau eines starken medizinischen Netzwerks.</p>
-    <ul>
-      <li>Online & flexibel</li>
-      <li>Networking & Geschäftsentwicklung</li>
-      <li>Preis: 5900 €</li>
-    </ul>
-    <button id="registerBtnDe">Jetzt anmelden</button>
-    <button id="addToCartDe">In den Warenkorb</button>
-  </section>
+  <h2>Entwickle deine Zukunft im Gesundheitswesen mit KI</h2>
+  <p>Unser 6-wöchiger virtueller Lehrgang in Deutsch und Englisch bietet eine großartige Gelegenheit, das medizinische Netzwerk von IVDY kennenzulernen und viele neue Geschäftsbeziehungen aufzubauen.</p>
 
-  <!-- English content -->
-  <section data-lang="en" class="hidden">
-    <h2>6-Week Virtual Module</h2>
-    <p>An intensive course to improve your knowledge and build a strong medical network.</p>
-    <ul>
-      <li>Online & Flexible</li>
-      <li>Networking & Business Development</li>
-      <li>Price: €5900</li>
-    </ul>
-    <button id="registerBtnEn">Register Now</button>
-    <button id="addToCartEn">Add to Cart</button>
-  </section>
+  <h3>Programmübersicht</h3>
+  <ul>
+    <li>Virtuelles Format: flexibel von überall teilnehmen</li>
+    <li>Dauer: 6 Wochen</li>
+    <li>Sprachen: Deutsch / Englisch</li>
+    <li>Preis: <span class="price">€5.900</span></li>
+    <li>Intensives Networking & Business Development</li>
+  </ul>
+
+  <h3>Für wen ist der Lehrgang geeignet?</h3>
+  <ul>
+    <li>Ärzte und medizinische Fachkräfte</li>
+    <li>Management von Kliniken und Arztpraxen</li>
+    <li>HealthTech-Entrepreneure und Startups</li>
+    <li>Führungskräfte und Entscheidungsträger im Gesundheitswesen</li>
+  </ul>
+
+  <h3>Inhalte (Auszug)</h3>
+  <ul>
+    <li>Grundlagen generativer KI und Machine Learning</li>
+    <li>Rechtliche und ethische Aspekte in der KI-Anwendung</li>
+    <li>Integration von KI in Marketing, Projektmanagement & Sales</li>
+    <li>Datenanalyse und Business Development im Medizinbereich</li>
+    <li>Führungskompetenzen für das digitale Gesundheitswesen</li>
+  </ul>
+
+  <a href="#" class="button">Jetzt anmelden</a>
 </main>
 
 <footer>
   <div class="footer-content">
     <p>&copy; 2025 IVDY – Alle Rechte vorbehalten.</p>
     <p>
-      <a href="impressum.html" aria-label="Impressum">Impressum</a> |
-      <a href="agb.html" aria-label="AGB">AGB</a> |
-      <a href="datenschutz.html" aria-label="Datenschutz">Datenschutz</a>
+      <a href="impressum.html">Impressum</a> |
+      <a href="agb.html">AGB</a> |
+      <a href="datenschutz.html">Datenschutz</a>
     </p>
   </div>
 </footer>
-
-<script>
-  const langToggle = document.getElementById('langToggle');
-  const deElements = document.querySelectorAll('[data-lang="de"]');
-  const enElements = document.querySelectorAll('[data-lang="en"]');
-
-  function setLanguage(lang) {
-    if (lang === 'en') {
-      deElements.forEach(el => el.classList.add('hidden'));
-      enElements.forEach(el => el.classList.remove('hidden'));
-      langToggle.textContent = 'Deutsch';
-      document.documentElement.lang = 'en';
-    } else {
-      enElements.forEach(el => el.classList.add('hidden'));
-      deElements.forEach(el => el.classList.remove('hidden'));
-      langToggle.textContent = 'English';
-      document.documentElement.lang = 'de';
-    }
-  }
-
-  langToggle.addEventListener('click', () => {
-    if (document.documentElement.lang === 'de') {
-      setLanguage('en');
-    } else {
-      setLanguage('de');
-    }
-  });
-
-  // Default Sprache Deutsch setzen
-  setLanguage('de');
-
-  // Beispiel: Event Listener für Buttons (nur Demo)
-  document.getElementById('registerBtnDe').addEventListener('click', () => {
-    alert('Danke für Ihre Anmeldung zum IVDY CheckUp!');
-  });
-  document.getElementById('registerBtnEn').addEventListener('click', () => {
-    alert('Thank you for registering for IVDY CheckUp!');
-  });
-  document.getElementById('addToCartDe').addEventListener('click', () => {
-    alert('Der Kurs wurde zum Warenkorb hinzugefügt.');
-  });
-  document.getElementById('addToCartEn').addEventListener('click', () => {
-    alert('Course added to cart.');
-  });
-</script>
 
 </body>
 </html>
