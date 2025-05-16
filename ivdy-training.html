@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IVDY Remote Checkup – Lehrgang</title>
-
+  <title>IVDY Remote Checkup</title>
   <link rel="icon" href="ivdy-favicon.ico" type="image/x-icon" />
   <link rel="preload" href="IVDY-logo-transparent.png" as="image" />
-
   <style>
     :root {
       --primary-color: #1d2f86;
@@ -16,396 +14,169 @@
       --bg-color: #f3f6fb;
       --white: #fff;
       --shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-
     body {
-      margin: 0;
+      font-family: Arial, sans-serif;
       background-color: var(--bg-color);
-      font-family: var(--font-family);
       color: var(--text-color);
-      line-height: 1.6;
+      margin: 0;
+      padding: 0;
     }
-
     header {
       background-color: var(--primary-color);
       color: var(--white);
-      padding: 1.5rem 1rem;
+      padding: 20px;
       text-align: center;
       box-shadow: var(--shadow);
-      position: relative;
     }
-
-    .lang-switch {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background-color: var(--secondary-color);
-      color: var(--white);
-      border: none;
-      padding: 0.3rem 0.8rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: background-color 0.3s ease;
-    }
-
-    .lang-switch:hover {
-      background-color: #417ad9;
-    }
-
-    header img {
-      max-height: 50px;
-      vertical-align: middle;
-    }
-
-    header h1 {
-      margin: 0.5rem 0 0;
-      font-weight: 700;
-      font-size: 1.8rem;
-    }
-
     main {
-      max-width: 900px;
-      margin: 2rem auto;
-      background: var(--white);
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: var(--shadow);
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
-
-    h2, h3 {
+    h1, h2 {
       color: var(--primary-color);
-      margin-top: 0;
     }
-
-    p {
-      margin: 1rem 0;
-    }
-
-    ul {
-      padding-left: 1.2rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    .price {
-      font-weight: 700;
-      font-size: 1.4rem;
-      color: var(--secondary-color);
-      margin-top: 1rem;
-    }
-
-    .button {
-      display: inline-block;
-      background-color: var(--secondary-color);
+    button, .btn {
+      background-color: var(--primary-color);
       color: var(--white);
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      margin-top: 2rem;
-      box-shadow: var(--shadow);
-      transition: background-color 0.3s ease;
       border: none;
+      padding: 12px 24px;
+      margin: 10px 5px 0 0;
       cursor: pointer;
       font-size: 1rem;
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+      transition: background-color 0.3s ease;
     }
-
-    .button:hover {
-      background-color: #417ad9;
+    button:hover, .btn:hover {
+      background-color: var(--secondary-color);
     }
-
+    .language-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: var(--secondary-color);
+      border-radius: 4px;
+      padding: 6px 12px;
+      color: var(--white);
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: var(--shadow);
+      user-select: none;
+    }
     footer {
       background-color: var(--primary-color);
       color: var(--white);
-      padding: 1rem;
+      padding: 20px 0;
       text-align: center;
       font-size: 0.9rem;
       box-shadow: var(--shadow);
-      margin-top: 3rem;
+      margin-top: 40px;
     }
-
     footer a {
       color: var(--secondary-color);
       text-decoration: none;
-      margin: 0 0.5rem;
-      transition: color 0.3s ease;
+      margin: 0 8px;
     }
-
     footer a:hover {
-      color: var(--white);
       text-decoration: underline;
     }
-
-    .footer-content p {
-      margin: 0.2rem 0;
-    }
-
-    /* Modal Styles */
-    .modal {
-      display: none; 
-      position: fixed; 
-      z-index: 1000; 
-      left: 0; 
-      top: 0; 
-      width: 100%; 
-      height: 100%; 
-      overflow: auto; 
-      background-color: rgba(0, 0, 0, 0.5); 
-    }
-
-    .modal-content {
-      background-color: var(--white);
-      margin: 10% auto; 
-      padding: 2rem;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-
-    .close {
-      color: var(--primary-color);
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      background: none;
-    }
-
-    .close:hover {
-      color: var(--secondary-color);
-    }
-
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: 600;
-    }
-
-    input[type="text"],
-    input[type="email"] {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.3rem;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      font-size: 1rem;
-    }
-
-    input[type="submit"] {
-      margin-top: 1.5rem;
-      background-color: var(--primary-color);
-      color: var(--white);
-      padding: 0.7rem 1.2rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
-
-    input[type="submit"]:hover {
-      background-color: var(--secondary-color);
-    }
-
-    @media (max-width: 600px) {
-      main {
-        margin: 1rem;
-        padding: 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .footer-content p {
-        font-size: 0.8rem;
-      }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="IVDY-logo-transparent.png" alt="IVDY Logo" />
-  <h1 data-lang="title">IVDY Remote Checkup Lehrgang</h1>
-  <button class="lang-switch" id="langSwitchBtn">English</button>
+  <h1 data-lang="de">IVDY Remote CheckUp</h1>
+  <h1 data-lang="en" class="hidden">IVDY Remote CheckUp</h1>
 </header>
 
+<div class="language-toggle" id="langToggle">English</div>
+
 <main>
-  <h2 data-lang="headline">Entwickle deine Zukunft im Gesundheitswesen mit KI</h2>
-  <p data-lang="intro">Unser 6-wöchiger virtueller Lehrgang in Deutsch und Englisch bietet eine großartige Gelegenheit, das medizinische Netzwerk von IVDY kennenzulernen und viele neue Geschäftsbeziehungen aufzubauen.</p>
+  <!-- Deutsch Inhalt -->
+  <section data-lang="de">
+    <h2>6 Wochen virtueller Kurs</h2>
+    <p>Ein intensives Modul zur Verbesserung Ihrer Kenntnisse und zum Aufbau eines starken medizinischen Netzwerks.</p>
+    <ul>
+      <li>Online & flexibel</li>
+      <li>Networking & Geschäftsentwicklung</li>
+      <li>Preis: 5900 €</li>
+    </ul>
+    <button id="registerBtnDe">Jetzt anmelden</button>
+    <button id="addToCartDe">In den Warenkorb</button>
+  </section>
 
-  <h3 data-lang="programTitle">Programmübersicht</h3>
-  <ul>
-    <li data-lang="program1">Virtuelles Format: flexibel von überall teilnehmen</li>
-    <li data-lang="program2">Dauer: 6 Wochen</li>
-    <li data-lang="program3">Sprachen: Deutsch / Englisch</li>
-    <li><span class="price">€5.900</span></li>
-    <li data-lang="program5">Intensives Networking & Business Development</li>
-  </ul>
-
-  <h3 data-lang="targetTitle">Für wen ist der Lehrgang geeignet?</h3>
-  <ul>
-    <li data-lang="target1">Ärzte und medizinische Fachkräfte</li>
-    <li data-lang="target2">Management von Kliniken und Arztpraxen</li>
-    <li data-lang="target3">HealthTech-Entrepreneure und Startups</li>
-    <li data-lang="target4">Führungskräfte und Entscheidungsträger im Gesundheitswesen</li>
-  </ul>
-
-  <h3 data-lang="contentTitle">Inhalte (Auszug)</h3>
-  <ul>
-    <li data-lang="content1">Grundlagen generativer KI und Machine Learning</li>
-    <li data-lang="content2">Rechtliche und ethische Aspekte in der KI-Anwendung</li>
-    <li data-lang="content3">Integration von KI in Marketing, Projektmanagement & Sales</li>
-    <li data-lang="content4">Datenanalyse und Business Development im Medizinbereich</li>
-    <li data-lang="content5">Führungskompetenzen für das digitale Gesundheitswesen</li>
-  </ul>
-
-  <button class="button" id="openModalBtn" data-lang="registerBtn">Jetzt anmelden</button>
+  <!-- English content -->
+  <section data-lang="en" class="hidden">
+    <h2>6-Week Virtual Module</h2>
+    <p>An intensive course to improve your knowledge and build a strong medical network.</p>
+    <ul>
+      <li>Online & Flexible</li>
+      <li>Networking & Business Development</li>
+      <li>Price: €5900</li>
+    </ul>
+    <button id="registerBtnEn">Register Now</button>
+    <button id="addToCartEn">Add to Cart</button>
+  </section>
 </main>
-
-<!-- Modal -->
-<div id="anmeldeModal" class="modal" aria-hidden="true" aria-labelledby="modalTitle" role="dialog">
-  <div class="modal-content">
-    <button class="close" id="closeModalBtn" aria-label="Close">&times;</button>
-    <h2 id="modalTitle" data-lang="modalTitle">Anmeldung zum Lehrgang</h2>
-    <form id="anmeldeForm">
-      <label for="name" data-lang="labelName">Name*</label>
-      <input type="text" id="name" name="name" required />
-
-      <label for="email" data-lang="labelEmail">E-Mail*</label>
-      <input type="email" id="email" name="email" required />
-
-      <input type="submit" value="Absenden" data-lang="submitBtn" />
-    </form>
-  </div>
-</div>
 
 <footer>
   <div class="footer-content">
-    <p data-lang="footerText">© 2024 IVDY Remote Checkup | Alle Rechte vorbehalten</p>
-    <p><a href="https://ivdy.com" target="_blank" rel="noopener" data-lang="footerLink">Zur Website</a></p>
+    <p>&copy; 2025 IVDY – Alle Rechte vorbehalten.</p>
+    <p>
+      <a href="impressum.html" aria-label="Impressum">Impressum</a> |
+      <a href="agb.html" aria-label="AGB">AGB</a> |
+      <a href="datenschutz.html" aria-label="Datenschutz">Datenschutz</a>
+    </p>
   </div>
 </footer>
 
 <script>
-  // Text für Deutsch und Englisch
-  const texts = {
-    de: {
-      title: "IVDY Remote Checkup Lehrgang",
-      headline: "Entwickle deine Zukunft im Gesundheitswesen mit KI",
-      intro: "Unser 6-wöchiger virtueller Lehrgang in Deutsch und Englisch bietet eine großartige Gelegenheit, das medizinische Netzwerk von IVDY kennenzulernen und viele neue Geschäftsbeziehungen aufzubauen.",
-      programTitle: "Programmübersicht",
-      program1: "Virtuelles Format: flexibel von überall teilnehmen",
-      program2: "Dauer: 6 Wochen",
-      program3: "Sprachen: Deutsch / Englisch",
-      program5: "Intensives Networking & Business Development",
-      targetTitle: "Für wen ist der Lehrgang geeignet?",
-      target1: "Ärzte und medizinische Fachkräfte",
-      target2: "Management von Kliniken und Arztpraxen",
-      target3: "HealthTech-Entrepreneure und Startups",
-      target4: "Führungskräfte und Entscheidungsträger im Gesundheitswesen",
-      contentTitle: "Inhalte (Auszug)",
-      content1: "Grundlagen generativer KI und Machine Learning",
-      content2: "Rechtliche und ethische Aspekte in der KI-Anwendung",
-      content3: "Integration von KI in Marketing, Projektmanagement & Sales",
-      content4: "Datenanalyse und Business Development im Medizinbereich",
-      content5: "Führungskompetenzen für das digitale Gesundheitswesen",
-      registerBtn: "Jetzt anmelden",
-      modalTitle: "Anmeldung zum Lehrgang",
-      labelName: "Name*",
-      labelEmail: "E-Mail*",
-      submitBtn: "Absenden",
-      footerText: "© 2024 IVDY Remote Checkup | Alle Rechte vorbehalten",
-      footerLink: "Zur Website"
-    },
-    en: {
-      title: "IVDY Remote Checkup Course",
-      headline: "Develop Your Future in Healthcare with AI",
-      intro: "Our 6-week virtual course in German and English offers a great opportunity to get to know the IVDY medical network and build many new business relationships.",
-      programTitle: "Program Overview",
-      program1: "Virtual format: participate flexibly from anywhere",
-      program2: "Duration: 6 weeks",
-      program3: "Languages: German / English",
-      program5: "Intensive networking & business development",
-      targetTitle: "Who is this course for?",
-      target1: "Doctors and medical professionals",
-      target2: "Clinic and practice management",
-      target3: "HealthTech entrepreneurs and startups",
-      target4: "Healthcare executives and decision-makers",
-      contentTitle: "Content (Excerpt)",
-      content1: "Basics of generative AI and machine learning",
-      content2: "Legal and ethical aspects in AI application",
-      content3: "Integration of AI in marketing, project management & sales",
-      content4: "Data analysis and business development in medicine",
-      content5: "Leadership skills for digital healthcare",
-      registerBtn: "Register now",
-      modalTitle: "Course Registration",
-      labelName: "Name*",
-      labelEmail: "Email*",
-      submitBtn: "Submit",
-      footerText: "© 2024 IVDY Remote Checkup | All rights reserved",
-      footerLink: "Go to Website"
+  const langToggle = document.getElementById('langToggle');
+  const deElements = document.querySelectorAll('[data-lang="de"]');
+  const enElements = document.querySelectorAll('[data-lang="en"]');
+
+  function setLanguage(lang) {
+    if (lang === 'en') {
+      deElements.forEach(el => el.classList.add('hidden'));
+      enElements.forEach(el => el.classList.remove('hidden'));
+      langToggle.textContent = 'Deutsch';
+      document.documentElement.lang = 'en';
+    } else {
+      enElements.forEach(el => el.classList.add('hidden'));
+      deElements.forEach(el => el.classList.remove('hidden'));
+      langToggle.textContent = 'English';
+      document.documentElement.lang = 'de';
     }
-  };
-
-  const langSwitchBtn = document.getElementById('langSwitchBtn');
-  const langElements = document.querySelectorAll('[data-lang]');
-  let currentLang = 'de';
-
-  function switchLanguage() {
-    currentLang = currentLang === 'de' ? 'en' : 'de';
-    langElements.forEach(el => {
-      const key = el.getAttribute('data-lang');
-      if (texts[currentLang][key]) {
-        el.textContent = texts[currentLang][key];
-      }
-    });
-    langSwitchBtn.textContent = currentLang === 'de' ? 'English' : 'Deutsch';
   }
 
-  langSwitchBtn.addEventListener('click', switchLanguage);
-
-  // Modal handling
-  const modal = document.getElementById('anmeldeModal');
-  const openModalBtn = document.getElementById('openModalBtn');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-  const form = document.getElementById('anmeldeForm');
-
-  openModalBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-    modal.setAttribute('aria-hidden', 'false');
-    document.getElementById('name').focus();
-  });
-
-  closeModalBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-    modal.setAttribute('aria-hidden', 'true');
-  });
-
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
+  langToggle.addEventListener('click', () => {
+    if (document.documentElement.lang === 'de') {
+      setLanguage('en');
+    } else {
+      setLanguage('de');
     }
   });
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert(currentLang === 'de' ? 'Vielen Dank für Ihre Anmeldung!' : 'Thank you for your registration!');
-    form.reset();
-    modal.style.display = 'none';
-    modal.setAttribute('aria-hidden', 'true');
+  // Default Sprache Deutsch setzen
+  setLanguage('de');
+
+  // Beispiel: Event Listener für Buttons (nur Demo)
+  document.getElementById('registerBtnDe').addEventListener('click', () => {
+    alert('Danke für Ihre Anmeldung zum IVDY CheckUp!');
+  });
+  document.getElementById('registerBtnEn').addEventListener('click', () => {
+    alert('Thank you for registering for IVDY CheckUp!');
+  });
+  document.getElementById('addToCartDe').addEventListener('click', () => {
+    alert('Der Kurs wurde zum Warenkorb hinzugefügt.');
+  });
+  document.getElementById('addToCartEn').addEventListener('click', () => {
+    alert('Course added to cart.');
   });
 </script>
 
