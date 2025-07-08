@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVDY Patienten Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        body { font-family: 'Inter', sans-serif !important; }
+        .fa, .fas, .far, .fal, .fab { font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important; }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sidebar: "#4A148C", /* Changed sidebar color to purple */
+                        primary: "#377dff",
+                        yellow: "#ffb800",
+                        red: "#fe4a49",
+                        purple: "#826af9",
+                        orange: "#fd7e14",
+                        teal: "#20c997",
+                        pink: "#e83e8c",
+                        indigo: "#6610f2"
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap">
+</head>
+<body class="font-sans bg-gray-100 flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <div id="sidebar" class="w-64 bg-sidebar text-white flex flex-col h-screen fixed">
+        <div class="p-4 border-b border-gray-700">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-white">IVDY</span>
+                </div>
+                <div class="flex space-x-3 text-gray-300">
+                    <button><i class="fa-regular fa-bell"></i></button>
+                    <button><i class="fa-solid fa-gear"></i></button>
+                    <button><i class="fa-regular fa-circle-question"></i></button>
+                </div>
+            </div>
+            <div class="mt-2 text-gray-300 text-sm">
+                <p>Patienten Dashboard</p>
+                <p>Willkommen zurück, Hatice</p>
+            </div>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto py-4 px-3">
+            <ul class="space-y-2">
+                <li id="dashboard-menu">
+                    <span class="flex items-center p-2 rounded-md text-gray-300 hover:bg-gray-700 cursor-pointer" data-target="dashboard">
+                        <i class="fa-solid fa-chart-line w-6"></i>
+                        <span>Dashboard</span>
+                    </span>
+                </li>
+                <li id="profile-menu">
+                    <span class="flex items-center p-2 rounded-md text-gray-300 hover:bg-gray-700 cursor-pointer" data-target="profile">
+                        <i class="fa-solid fa-user w-6"></i>
+                        <span>Mein Profil</span>
+                    </span>
+                </li>
+                <li id="ai-analysis-menu">
+                    <span class="flex items-center p-2 rounded-md text-gray-300 hover:bg-gray-700 cursor-pointer">
+                        <i class="fa-solid fa-brain w-6"></i>
+                        <span>KI-Analyse</span>
+                    </span>
+                </li>
+                <li id="doctor-search-menu">
+                    <span class="flex items-center p-2 rounded-md text-gray-300 hover:bg-gray-700 cursor-pointer">
+                        <i class="fa-solid fa-user-doctor w-6"></i>
+                        <span>Arztsuche</span>
+                    </span>
+                </li>
+                <li id="appointments-menu">
+                    <span class="flex items-center p-2 rounded-md text-gray-300 hover:bg-gray-700 cursor-pointer" data-target="appointments">
+                        <i class="fa-solid fa-calendar-days w-6"></i>
+                        <span>Termine</span>
+                    </span>
+                </li>
+                <li id="notifications-menu">
+                    <span class="flex items-center p-2 rounded-md text-gray-300 hover:bg-gray-700 cursor-pointer">
+                        <i class="fa-solid fa-bell w-6"></i>
+                        <span>Benachrichtigungen</span>
+                        <span class="ml-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">4</span>
+                    </span>
+                </li>
+                <li id="health-education-menu">
+                    <span class="flex items-center p-2 rounded-md text-gray-300 hover:bg-gray-700 cursor-pointer">
+                        <i class="fa-solid fa-book-medical w-6"></i>
+                        <span>Gesundheitsbildung</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="p-4 border-t border-gray-700">
+            <button class="w-full bg-red-600 text-white py-2 rounded-md font-bold mb-4">
+                NOTFALL
+            </button>
+            <div class="text-gray-400 text-xs mb-4">
+                <p>Letzter Login: 25.07.2023, 08:45</p>
+                <p>Patientenakte: #HT24601</p>
+            </div>
+            <div class="flex items-center justify-between text-gray-400 text-xs">
+                <span>© 2023 IVDY</span>
+                <div class="flex items-center">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="w-6 h-6 rounded-full mr-2" alt="Avatar">
+                    <span>@Hatice Tavil</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div id="main-content" class="ml-64 flex-1 overflow-y-auto p-6">
+        <!-- Content will be loaded here -->
+    </div>
+
+    <script>
+        // Store the HTML content of each page as a string
+        const dashboardHtmlContent = `
+            <div class="p-6">
+                <h1 class="text-2xl font-bold mb-6">Gesundheitsübersicht</h1>
+                
+                <!-- Top Cards Row -->
+                <div id="top-cards" class="grid grid-cols-5 gap-4 mb-6">
+                    <!-- KI-Gesundheits-Score -->
+                    <div class="bg-gradient-to-r from-blue-700 to-blue-900 p-4 rounded-lg shadow">
+                        <h3 class="text-white text-sm font-medium mb-2">KI-Gesundheits-Score</h3>
+                        <div class="flex items-end justify-between">
+                            <div class="text-2xl font-bold text-white">87 / 100</div>
+                            <div class="text-green-400 font-medium text-sm">+1.2%</div>
+                        </div>
+                        <p class="text-gray-300 text-xs mt-1">Ihr Gesundheitszustand ist gut</p>
+                    </div>
+                    
+                    <!-- Puls -->
+                    <div class="bg-yellow p-4 rounded-lg shadow">
+                        <h3 class="text-gray-800 text-sm font-medium mb-2">Puls</h3>
+                        <div class="flex items-end justify-between">
+                            <div class="text-2xl font-bold text-gray-800">78</div>
+                            <div class="text-gray-700 font-medium text-sm">Normal bpm</div>
+                        </div>
+                        <p class="text-gray-700 text-xs mt-1">Stabil seit 2 Wochen</p>
+                    </div>
+                    
+                    <!-- Blutdruck -->
+                    <div class="bg-red p-4 rounded-lg shadow">
+                        <h3 class="text-white text-sm font-medium mb-2">Blutdruck</h3>
+                        <div class="flex items-end justify-between">
+                            <div class="text-2xl font-bold text-white">128/85</div>
+                        </div>
+                        <p class="text-gray-200 text-xs mt-1">Leicht erhöht - Weniger Salz</p>
+                    </div>
+                    
+                    <!-- EKG Status -->
+                    <div class="bg-purple p-4 rounded-lg shadow">
+                        <h3 class="text-white text-sm font-medium mb-2">EKG Status</h3>
+                        <div class="flex items-end justify-between">
+                            <div class="text-2xl font-bold text-white">Normal</div>
+                        </div>
+                        <p class="text-gray-200 text-xs mt-1">Letzte Messung vor 3 Tagen</p>
+                    </div>
+                    
+                    <!-- Nächster Termin -->
+                    <div class="bg-orange p-4 rounded-lg shadow">
+                        <h3 class="text-white text-sm font-medium mb-2">Nächster Termin</h3>
+                        <div class="text-lg font-bold text-white">Dr. Mueller</div>
+                        <p class="text-white text-sm">27. Juli, 14:30 Uhr</p>
+                    </div>
+                </div>
+                
+                <!-- Middle Cards Row -->
+                <div id="middle-cards" class="grid grid-cols-3 gap-6 mb-6">
+                    <!-- Herzfrequenzverlauf -->
+                    <div class="bg-white p-4 rounded-lg shadow-lg col-span-1">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-800 font-medium">Herzfrequenzverlauf</h3>
+                            <div class="flex text-sm space-x-1">
+                                <button class="px-3 py-1 text-gray-700 rounded-full hover:bg-gray-100 transition-colors duration-200">Tag</button>
+                                <button class="px-3 py-1 text-gray-700 rounded-full hover:bg-gray-100 transition-colors duration-200">Woche</button>
+                                <button class="px-3 py-1 bg-primary text-white rounded-full font-medium shadow-md">Monat</button>
+                            </div>
+                        </div>
+                        <div id="heart-rate-chart" class="h-48 mb-3 bg-gradient-to-br from-blue-50 to-white rounded-lg p-2"></div>
+                        <div class="flex justify-between text-sm mt-3">
+                            <div class="text-gray-800">Min: <span class="font-semibold text-primary">64 bpm</span></div>
+                            <div class="text-gray-800">Avg: <span class="font-semibold text-primary">76 bpm</span></div>
+                            <div class="text-gray-800">Max: <span class="font-semibold text-primary">92 bpm</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Neueste Analysen -->
+                    <div class="bg-white p-4 rounded-lg shadow col-span-1">
+                        <h3 class="text-gray-800 font-medium mb-4">Neueste Analysen</h3>
+                        <div class="space-y-4">
+                            <div class="border-b pb-3">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-800 font-medium">Blutzuckeranalyse</span>
+                                    <span class="text-green-600 font-medium">Normal</span>
+                                </div>
+                                <p class="text-gray-600 text-sm">Nüchternblutzucker: 92 mg/dL</p>
+                            </div>
+                            <div class="border-b pb-3">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-800 font-medium">Cholesterinwerte</span>
+                                    <span class="text-orange-500 font-medium">Leicht erhöht</span>
+                                </div>
+                                <p class="text-gray-600 text-sm">Gesamtcholesterin: 215 mg/dL</p>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-800 font-medium">Vitamin D</span>
+                                    <span class="text-red-600 font-medium">Niedrig</span>
+                                </div>
+                                <p class="text-gray-600 text-sm">Aktueller Wert: 18 ng/mL</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- KI-Empfehlungen -->
+                    <div class="bg-white p-4 rounded-lg shadow col-span-1">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-800 font-medium">KI-Empfehlungen</h3>
+                            <span class="text-xs text-gray-500">Powered by AI</span>
+                        </div>
+                        <div class="space-y-3 mb-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <i class="fa-solid fa-person-walking text-primary"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-800 font-medium">Bewegung steigern</h4>
+                                    <p class="text-gray-600 text-sm">30 Min. tägliches Gehen empfohlen</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <i class="fa-solid fa-apple-whole text-primary"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-800 font-medium">Ernährungsumstellung</h4>
+                                    <p class="text-gray-600 text-sm">Mehr Ballaststoffe und Omega-3</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <i class="fa-solid fa-pills text-primary"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-800 font-medium">Vitamin D Ergänzung</h4>
+                                    <p class="text-gray-600 text-sm">2000 IE täglich empfohlen</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-2 rounded-md text-sm font-medium">
+                            Vollständigen Gesundheitsplan anzeigen
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Bottom Cards Row -->
+                <div id="bottom-cards" class="grid grid-cols-2 gap-6">
+                    <!-- Bevorstehende Termine -->
+                    <div class="bg-white p-4 rounded-lg shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-800 font-medium">Bevorstehende Termine</h3>
+                            <span class="text-primary text-sm cursor-pointer hover:underline">Alle anzeigen</span>
+                        </div>
+                        <div class="space-y-4 mb-4">
+                            <div class="border-b border-gray-100 pb-3 last:border-b-0">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div>
+                                        <h4 class="text-gray-800 font-semibold">Dr. Mueller - Kardiologie</h4>
+                                        <p class="text-gray-600 text-sm">27. Juli, 14:30 Uhr</p>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium hover:bg-purple-200 transition-colors duration-200">Details</button>
+                                        <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium hover:bg-gray-200 transition-colors duration-200">Verschieben</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-b border-gray-100 pb-3 last:border-b-0">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div>
+                                        <h4 class="text-gray-800 font-semibold">Blutuntersuchung</h4>
+                                        <p class="text-gray-600 text-sm">2. August, 09:15 Uhr</p>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium hover:bg-purple-200 transition-colors duration-200">Details</button>
+                                        <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium hover:bg-gray-200 transition-colors duration-200">Verschieben</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <div>
+                                        <h4 class="text-gray-800 font-semibold">Telekonsultation - Dr. Weber</h4>
+                                        <p class="text-gray-600 text-sm">10. August, 16:00 Uhr</p>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium hover:bg-purple-200 transition-colors duration-200">Details</button>
+                                        <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium hover:bg-gray-200 transition-colors duration-200">Verschieben</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors duration-200 mt-4">
+                            Neuen Termin vereinbaren
+                        </button>
+                    </div>
+                    
+                    <!-- Gesundheitsziele -->
+                    <div class="bg-white p-4 rounded-lg shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-800 font-medium">Gesundheitsziele</h3>
+                            <button class="text-primary hover:text-blue-600 transition-colors duration-200"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div class="space-y-4 mb-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-800 font-medium">Tägliche Schritte</span>
+                                    <span class="text-gray-600 font-semibold">7,230 / 10,000</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 shadow-inner">
+                                    <div class="bg-gradient-to-r from-primary to-blue-500 h-2.5 rounded-full shadow-md" style="width: 72%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-800 font-medium">Wasseraufnahme</span>
+                                    <span class="text-gray-600 font-semibold">1.5L / 2.5L</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 shadow-inner">
+                                    <div class="bg-gradient-to-r from-primary to-blue-500 h-2.5 rounded-full shadow-md" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-800 font-medium">Schlafqualität</span>
+                                    <span class="text-green-600 font-semibold">Gut</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 shadow-inner">
+                                    <div class="bg-gradient-to-r from-teal-400 to-green-500 h-2.5 rounded-full shadow-md" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-800 font-medium">Stressmanagement</span>
+                                    <span class="text-orange-500 font-semibold">Moderat</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 shadow-inner">
+                                    <div class="bg-gradient-to-r from-orange-400 to-red-500 h-2.5 rounded-full shadow-md" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mt-4">
+                            Regelmäßige Aktivität und ausreichende Flüssigkeitszufuhr sind wichtig für Ihre Gesundheit. Sie machen gute Fortschritte!
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Footer -->
+                <div id="footer" class="mt-8 pt-4 border-t border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <div class="text-gray-500 text-sm">
+                            © 2023 IVDY Patient Dashboard. Alle Rechte vorbehalten.
+                        </div>
+                        <div class="flex space-x-4 text-sm">
+                            <span class="text-gray-500 hover:text-gray-700 cursor-pointer">Datenschutz</span>
+                            <span class="text-gray-500 hover:text-gray-700 cursor-pointer">Nutzungsbedingungen</span>
+                            <span class="text-gray-500 hover:text-gray-700 cursor-pointer">Hilfe &amp; Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const profileHtmlContent = `
+            <div class="p-6">
+                <!-- Header -->
+                <div id="profile-header" class="mb-6">
+                    <h1 class="text-2xl font-bold text-gray-800">Mein Profil</h1>
+                    <p class="text-gray-600 mt-1">Verwalten Sie Ihre persönlichen Daten und Gesundheitsinformationen</p>
+                </div>
+
+                <!-- Profile Banner -->
+                <div id="profile-banner" class="bg-gradient-to-r from-primary to-blue-600 rounded-xl p-6 mb-6 text-white shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="relative">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover" alt="Profile">
+                                <button class="absolute bottom-0 right-0 bg-white text-primary p-2 rounded-full shadow-lg hover:bg-gray-100 transition-colors duration-200">
+                                    <i class="fa-solid fa-camera text-xs"></i>
+                                </button>
+                            </div>
+                            <div class="ml-4">
+                                <h2 class="text-3xl font-bold text-white drop-shadow-sm">Hatice Tavil</h2>
+                                <p class="text-blue-100 text-lg">Patientin seit März 2020</p>
+                                <div class="flex items-center mt-2 text-blue-200">
+                                    <i class="fa-solid fa-shield-halved mr-2 text-blue-300"></i>
+                                    <span class="text-sm">Verifiziertes Profil</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="bg-white text-primary px-5 py-2 rounded-full font-medium hover:bg-gray-100 transition-colors duration-200 shadow-md">
+                            <i class="fa-solid fa-edit mr-2"></i>
+                            Profil bearbeiten
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Profile Content -->
+                <div id="profile-content" class="grid grid-cols-3 gap-6">
+                    <!-- Personal Information -->
+                    <div id="personal-info" class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Persönliche Daten</h3>
+                            <button class="text-primary hover:text-blue-600 transition-colors duration-200">
+                                <i class="fa-solid fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Vollständiger Name</label>
+                                <p class="text-gray-800 font-semibold">Hatice Tavil</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Geburtsdatum</label>
+                                <p class="text-gray-800">15. März 1985</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Geschlecht</label>
+                                <p class="text-gray-800">Weiblich</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Blutgruppe</label>
+                                <p class="text-gray-800 font-semibold text-red-600">A+</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Größe</label>
+                                <p class="text-gray-800">165 cm</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Gewicht</label>
+                                <p class="text-gray-800">62 kg</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div id="contact-info" class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Kontaktdaten</h3>
+                            <button class="text-primary hover:text-blue-600 transition-colors duration-200">
+                                <i class="fa-solid fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">E-Mail</label>
+                                <p class="text-gray-800">hatice.tavil@email.com</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Telefon</label>
+                                <p class="text-gray-800">+49 176 12345678</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Adresse</label>
+                                <p class="text-gray-800">Musterstraße 123<br>12345 Berlin</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Notfallkontakt</label>
+                                <p class="text-gray-800 font-semibold">Dr. Sarah Weber</p>
+                                <p class="text-gray-600 text-sm">+49 30 12345678</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insurance Information -->
+                    <div id="insurance-info" class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Versicherung</h3>
+                            <button class="text-primary hover:text-blue-600 transition-colors duration-200">
+                                <i class="fa-solid fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Krankenkasse</label>
+                                <p class="text-gray-800 font-semibold">AOK Berlin</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Versichertennummer</label>
+                                <p class="text-gray-800">H123456789</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Versicherungstyp</label>
+                                <p class="text-gray-800">Gesetzlich versichert</p>
+                            </div>
+                            <div>
+                                <label class="text-sm font-medium text-gray-500">Gültig bis</label>
+                                <p class="text-gray-800">31.12.2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical Information -->
+                <div id="medical-info" class="grid grid-cols-2 gap-6 mt-6">
+                    <!-- Allergies & Conditions -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Allergien &amp; Erkrankungen</h3>
+                            <button class="text-primary hover:text-blue-600 transition-colors duration-200">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-red-50 rounded-xl border border-red-200 ring-1 ring-red-100 hover:scale-[1.02] transition-transform duration-200">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-triangle-exclamation text-red-500 text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Penicillin-Allergie</p>
+                                        <p class="text-sm text-gray-600">Schwere Reaktion</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                                    <i class="fa-solid fa-edit"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-xl border border-yellow-200 ring-1 ring-yellow-100 hover:scale-[1.02] transition-transform duration-200">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-heart text-yellow-500 text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Bluthochdruck</p>
+                                        <p class="text-sm text-gray-600">Seit 2019</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                                    <i class="fa-solid fa-edit"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-xl border border-blue-200 ring-1 ring-blue-100 hover:scale-[1.02] transition-transform duration-200">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-eye text-blue-500 text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Kurzsichtigkeit</p>
+                                        <p class="text-sm text-gray-600">-2.5 Dioptrien</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                                    <i class="fa-solid fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Medications -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Aktuelle Medikamente</h3>
+                            <button class="text-primary hover:text-blue-600 transition-colors duration-200">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100 hover:scale-[1.02] transition-transform duration-200">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-pills text-purple text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Ramipril 5mg</p>
+                                        <p class="text-sm text-gray-600">1x täglich morgens</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                                    <i class="fa-solid fa-edit"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100 hover:scale-[1.02] transition-transform duration-200">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-pills text-orange text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Vitamin D3</p>
+                                        <p class="text-sm text-gray-600">2000 IE täglich</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                                    <i class="fa-solid fa-edit"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100 hover:scale-[1.02] transition-transform duration-200">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-pills text-green-500 text-xl mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Magnesium</p>
+                                        <p class="text-sm text-gray-600">300mg abends</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                                    <i class="fa-solid fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div id="security-settings" class="bg-white rounded-xl shadow-lg p-6 mt-6 hover:shadow-xl transition-all duration-300">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Sicherheitseinstellungen</h3>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="text-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <i class="fa-solid fa-key text-primary text-2xl mb-2"></i>
+                            <h4 class="font-medium text-gray-800">Passwort ändern</h4>
+                            <p class="text-sm text-gray-600 mt-1">Letztes Update: 15.06.2023</p>
+                        </div>
+                        <div class="text-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <i class="fa-solid fa-shield-halved text-green-500 text-2xl mb-2"></i>
+                            <h4 class="font-medium text-gray-800">2FA aktivieren</h4>
+                            <p class="text-sm text-gray-600 mt-1">Zusätzliche Sicherheit</p>
+                        </div>
+                        <div class="text-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <i class="fa-solid fa-download text-purple text-2xl mb-2"></i>
+                            <h4 class="font-medium text-gray-800">Daten exportieren</h4>
+                            <p class="text-sm text-gray-600 mt-1">Ihre Gesundheitsdaten</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div id="footer" class="mt-8 pt-4 border-t border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <div class="text-gray-500 text-sm">
+                            © 2023 IVDY Patient Dashboard. Alle Rechte vorbehalten.
+                        </div>
+                        <div class="flex space-x-4 text-sm">
+                            <span class="text-gray-500 hover:text-gray-700 cursor-pointer">Datenschutz</span>
+                            <span class="text-gray-500 hover:text-gray-700 cursor-pointer">Nutzungsbedingungen</span>
+                            <span class="text-gray-500 hover:text-gray-700 cursor-pointer">Hilfe &amp; Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const appointmentsHtmlContent = `
+            <div class="p-6">
+                <!-- Header Section -->
+                <div id="appointments-header" class="mb-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Termine</h1>
+                            <p class="text-gray-600 mt-1">Verwalten Sie Ihre Arzttermine und Gesundheitsvorsorge</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <button class="bg-teal text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                                <i class="fa-solid fa-calendar-plus mr-2"></i>
+                                Neuer Termin
+                            </button>
+                            <button class="bg-purple text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                                <i class="fa-solid fa-video mr-2"></i>
+                                Telekonsultation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div id="appointment-stats" class="grid grid-cols-4 gap-4 mb-6">
+                    <div class="bg-gradient-to-r from-primary to-blue-600 p-4 rounded-lg shadow text-white">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium opacity-90">Heute</h3>
+                                <p class="text-2xl font-bold">2</p>
+                            </div>
+                            <i class="fa-solid fa-calendar-day text-2xl opacity-80"></i>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-teal to-green-500 p-4 rounded-lg shadow text-white">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium opacity-90">Diese Woche</h3>
+                                <p class="text-2xl font-bold">5</p>
+                            </div>
+                            <i class="fa-solid fa-calendar-week text-2xl opacity-80"></i>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-orange to-red-500 p-4 rounded-lg shadow text-white">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium opacity-90">Ausstehend</h3>
+                                <p class="text-2xl font-bold">3</p>
+                            </div>
+                            <i class="fa-solid fa-clock text-2xl opacity-80"></i>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple to-pink-500 p-4 rounded-lg shadow text-white">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-sm font-medium opacity-90">Abgeschlossen</h3>
+                                <p class="text-2xl font-bold">12</p>
+                            </div>
+                            <i class="fa-solid fa-check-circle text-2xl opacity-80"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter and Search -->
+                <div id="appointment-filters" class="bg-white p-4 rounded-lg shadow mb-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="relative">
+                                <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                <input type="text" placeholder="Termin suchen..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+                            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option>Alle Termine</option>
+                                <option>Heute</option>
+                                <option>Diese Woche</option>
+                                <option>Nächste Woche</option>
+                            </select>
+                            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option>Alle Ärzte</option>
+                                <option>Kardiologie</option>
+                                <option>Allgemeinmedizin</option>
+                                <option>Orthopädie</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 bg-gray-100 rounded-lg hover:bg-gray-200">
+                                <i class="fa-solid fa-list text-gray-600"></i>
+                            </button>
+                            <button class="p-2 bg-primary text-white rounded-lg">
+                                <i class="fa-solid fa-calendar text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Appointments -->
+                <div id="upcoming-appointments" class="mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Bevorstehende Termine</h2>
+                    <div class="space-y-4">
+                        <!-- Appointment Card 1 -->
+                        <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-red-100 p-3 rounded-full">
+                                        <i class="fa-solid fa-heart-pulse text-red text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-800">Dr. Sarah Mueller</h3>
+                                        <p class="text-gray-600">Kardiologie - Kontrolluntersuchung</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                                            <span><i class="fa-solid fa-calendar-day mr-1"></i>Heute, 27. Juli 2023</span>
+                                            <span><i class="fa-solid fa-clock mr-1"></i>14:30 - 15:15 Uhr</span>
+                                            <span><i class="fa-solid fa-location-dot mr-1"></i>Praxis Zentrum</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">In 2 Std.</span>
+                                    <button class="bg-purple text-white px-4 py-2 rounded-lg text-sm font-medium">Details</button>
+                                    <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium">Verschieben</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Appointment Card 2 -->
+                        <div class="bg-white p-4 rounded-lg shadow border-l-4 border-teal">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-teal-100 p-3 rounded-full">
+                                        <i class="fa-solid fa-flask-vial text-teal text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-800">Labor Zentrum</h3>
+                                        <p class="text-gray-600">Blutuntersuchung - Routinekontrolle</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                                            <span><i class="fa-solid fa-calendar-day mr-1"></i>Morgen, 28. Juli 2023</span>
+                                            <span><i class="fa-solid fa-clock mr-1"></i>08:00 - 08:30 Uhr</span>
+                                            <span><i class="fa-solid fa-location-dot mr-1"></i>Labor Zentrum</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Bestätigt</span>
+                                    <button class="bg-purple text-white px-4 py-2 rounded-lg text-sm font-medium">Details</button>
+                                    <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium">Verschieben</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Appointment Card 3 -->
+                        <div class="bg-white p-4 rounded-lg shadow border-l-4 border-primary">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-blue-100 p-3 rounded-full">
+                                        <i class="fa-solid fa-video text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-800">Dr. Michael Weber</h3>
+                                        <p class="text-gray-600">Telekonsultation - Nachbesprechung</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                                            <span><i class="fa-solid fa-calendar-day mr-1"></i>2. August 2023</span>
+                                            <span><i class="fa-solid fa-clock mr-1"></i>16:00 - 16:30 Uhr</span>
+                                            <span><i class="fa-solid fa-video mr-1"></i>Online Termin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Online</span>
+                                    <button class="bg-purple text-white px-4 py-2 rounded-lg text-sm font-medium">Beitreten</button>
+                                    <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium">Verschieben</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar and Recent Appointments -->
+                <div id="calendar-recent" class="grid grid-cols-3 gap-6 mb-6">
+                    <!-- Mini Calendar -->
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-gray-800">Juli 2023</h3>
+                            <div class="flex items-center space-x-2">
+                                <button class="p-1 hover:bg-gray-100 rounded"><i class="fa-solid fa-chevron-left text-gray-600"></i></button>
+                                <button class="p-1 hover:bg-gray-100 rounded"><i class="fa-solid fa-chevron-right text-gray-600"></i></button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 text-center text-sm">
+                            <div class="text-gray-500 font-medium p-2">Mo</div>
+                            <div class="text-gray-500 font-medium p-2">Di</div>
+                            <div class="text-gray-500 font-medium p-2">Mi</div>
+                            <div class="text-gray-500 font-medium p-2">Do</div>
+                            <div class="text-gray-500 font-medium p-2">Fr</div>
+                            <div class="text-gray-500 font-medium p-2">Sa</div>
+                            <div class="text-gray-500 font-medium p-2">So</div>
+                            <div class="p-2 text-gray-400">26</div>
+                            <div class="p-2 bg-primary text-white rounded-full">27</div>
+                            <div class="p-2 bg-teal-100 text-teal-800 rounded-full">28</div>
+                            <div class="p-2">29</div>
+                            <div class="p-2">30</div>
+                            <div class="p-2">31</div>
+                            <div class="p-2">1</div>
+                            <div class="p-2 bg-purple-100 text-purple-800 rounded-full">2</div>
+                            <div class="p-2">3</div>
+                            <div class="p-2">4</div>
+                            <div class="p-2">5</div>
+                            <div class="p-2">6</div>
+                            <div class="p-2">7</div>
+                            <div class="p-2">8</div>
+                            <div class="p-2">9</div>
+                            <div class="p-2 bg-orange-100 text-orange-800 rounded-full">10</div>
+                            <div class="p-2">11</div>
+                            <div class="p-2">12</div>
+                            <div class="p-2">13</div>
+                            <div class="p-2">14</div>
+                            <div class="p-2">15</div>
+                            <div class="p-2">16</div>
+                            <div class="p-2">17</div>
+                            <div class="p-2">18</div>
+                            <div class="p-2">19</div>
+                            <div class="p-2">20</div>
+                            <div class="p-2">21</div>
+                            <div class="p-2">22</div>
+                            <div class="p-2">23</div>
+                            <div class="p-2">24</div>
+                            <div class="p-2">25</div>
+                            <div class="p-2">26</div>
+                            <div class="p-2">27</div>
+                            <div class="p-2">28</div>
+                            <div class="p-2">29</div>
+                            <div class="p-2">30</div>
+                            <div class="p-2">31</div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Appointments -->
+                    <div class="bg-white p-4 rounded-lg shadow col-span-2">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-gray-800">Letzte Termine</h3>
+                            <span class="text-primary text-sm cursor-pointer">Alle anzeigen</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Dr. Anna Schmidt - Allgemeinmedizin</h4>
+                                        <p class="text-sm text-gray-600">14. Juli 2023, 10:00 Uhr</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fa-solid fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Zahnarztpraxis Dr. Meier</h4>
+                                        <p class="text-sm text-gray-600">01. Juli 2023, 15:30 Uhr</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fa-solid fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Physiotherapie Müller</p>
+                                        <p class="text-sm text-gray-600">20. Juni 2023, 09:00 Uhr</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i class="fa-solid fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div id="footer" class="mt-8 pt-4 border-t border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <div class="text-gray-500 text-sm">
+                            © 2023 IVDY Patient Dashboard. Alle Rechte vorbehalten.
+                        </div>
+                        <div class="flex space-x-4 text-sm">
+                            <span class="text-gray-500 hover:text-gray-700 cursor-pointer">Datenschutz</span>
+                            <span class="text-gray-500 hover:text-gray-700 cursor-pointer">Nutzungsbedingungen</span>
+                            <span class="text-gray-500 hover:text-gray-700 cursor-pointer">Hilfe &amp; Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainContent = document.getElementById('main-content');
+            const menuItems = document.querySelectorAll('#sidebar ul li span');
+
+            // Function to load content based on the target ID
+            function loadContent(targetId) {
+                let htmlContent = '';
+                let activeMenuItem = null;
+
+                // Remove active class from all menu items
+                menuItems.forEach(item => {
+                    item.classList.remove('bg-primary', 'text-white');
+                    item.classList.add('text-gray-300', 'hover:bg-gray-700');
+                });
+
+                switch (targetId) {
+                    case 'dashboard':
+                        htmlContent = dashboardHtmlContent;
+                        activeMenuItem = document.getElementById('dashboard-menu').querySelector('span');
+                        break;
+                    case 'profile':
+                        htmlContent = profileHtmlContent;
+                        activeMenuItem = document.getElementById('profile-menu').querySelector('span');
+                        break;
+                    case 'appointments':
+                        htmlContent = appointmentsHtmlContent;
+                        activeMenuItem = document.getElementById('appointments-menu').querySelector('span');
+                        break;
+                    default:
+                        // Load Dashboard by default
+                        htmlContent = dashboardHtmlContent;
+                        activeMenuItem = document.getElementById('dashboard-menu').querySelector('span');
+                        break;
+                }
+
+                // Create a temporary div to parse the HTML content
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = htmlContent;
+
+                // Extract content within the <div class="p-6"> or similar main content wrapper
+                // Assuming all main content is wrapped in a single top-level div within the provided snippets
+                const contentToLoad = tempDiv.querySelector('.p-6').innerHTML;
+                mainContent.innerHTML = contentToLoad;
+
+
+                // Add active class to the current menu item
+                if (activeMenuItem) {
+                    activeMenuItem.classList.remove('text-gray-300', 'hover:bg-gray-700');
+                    activeMenuItem.classList.add('bg-primary', 'text-white');
+                }
+
+                // Re-initialize Highcharts if on Dashboard
+                if (targetId === 'dashboard') {
+                    Highcharts.chart('heart-rate-chart', {
+                        chart: {
+                            type: 'spline',
+                            style: {
+                                fontFamily: 'Inter, sans-serif'
+                            }
+                        },
+                        title: {
+                            text: null
+                        },
+                        xAxis: {
+                            categories: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+                            labels: {
+                                style: {
+                                    color: '#6B7280'
+                                }
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text: null
+                            },
+                            min: 60,
+                            max: 100,
+                            tickInterval: 10,
+                            labels: {
+                                style: {
+                                    color: '#6B7280'
+                                }
+                            },
+                            gridLineColor: '#E5E7EB'
+                        },
+                        tooltip: {
+                            valueSuffix: ' bpm'
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        plotOptions: {
+                            spline: {
+                                marker: {
+                                    radius: 4,
+                                    lineColor: '#377dff',
+                                    lineWidth: 1
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Herzfrequenz',
+                            color: '#377dff',
+                            data: [72, 68, 76, 81, 75, 92, 74]
+                        }]
+                    });
+                }
+            }
+
+            // Add event listeners to menu items
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    if (target) {
+                        loadContent(target);
+                    }
+                });
+            });
+
+            // Load dashboard content initially
+            loadContent('dashboard');
+        });
+    </script>
+</body>
+</html>
