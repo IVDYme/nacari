@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de-en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IVDY Remote Checkup</title>
+  <title>IVDY Remote Checkup | Fernuntersuchung</title>
 
   <link rel="icon" href="ivdy-favicon.ico" type="image/x-icon">
   <link rel="preload" href="IVDY-logo-transparent.png" as="image">
@@ -37,7 +37,7 @@
       display: none;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* Hauptausrichtung bleibt zentriert */
+      justify-content: center;
       min-height: 100vh;
       padding: 20px;
     }
@@ -46,7 +46,6 @@
       display: flex;
     }
 
-    /* Header-Styling bleibt wie es war */
     .promo-header {
       display: flex;
       align-items: center;
@@ -54,11 +53,11 @@
       margin-bottom: 15px;
     }
 
-    .logo-text { /* IVDY Text-Logo im Header */
+    .logo-text {
       font-size: 2rem;
       font-weight: bold;
       color: var(--primary-color);
-      margin-top: 10px; /* Beibehalten oder anpassen nach Geschmack */
+      margin-top: 10px;
     }
 
     .premium-badge {
@@ -67,17 +66,8 @@
       padding: 5px 12px;
       border-radius: 10px;
       font-size: 0.8rem;
-      margin-left: 10px; /* Abstand zum Text-Logo */
+      margin-left: 10px;
       font-weight: bold;
-    }
-
-    .promo-image-runner {
-      width: 90%;
-      max-width: 400px;
-      border-radius: 15px;
-      margin: 20px auto 0;
-      display: block;
-      background-color: #eee;
     }
 
     .promo-main-title {
@@ -85,6 +75,39 @@
       font-size: 1.5rem;
       margin: 25px 0 20px;
       color: var(--primary-color);
+    }
+
+    .translation {
+      font-size: 1rem;
+      color: #555;
+      margin-top: 5px;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    .feature {
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+      width: 180px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-color);
+      flex-grow: 1;
+      min-width: 160px;
+    }
+
+    .feature .translation {
+      font-size: 0.85rem;
+      color: #777;
     }
 
     .promo-price-details {
@@ -113,41 +136,15 @@
       transform: translateY(-2px);
     }
 
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      max-width: 600px;
-      margin: 20px auto;
-    }
-
-    .feature {
-      background: var(--white);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      padding: 20px;
-      width: 180px;
-      text-align: center;
-      font-size: 0.95rem;
-      color: var(--text-color);
-      flex-grow: 1;
-      min-width: 160px;
-    }
-
-    /* Styling für das Logo, das unten angezeigt wird */
     .footer-logo-container {
-      margin-top: 40px;  /* Abstand nach oben zum Button */
-      margin-bottom: 20px; /* Etwas Platz am Ende der Seite */
+      margin-top: 40px;
+      margin-bottom: 20px;
     }
 
     .footer-logo-image {
-      height: 50px; /* Beispiel: Höhe des Logos anpassen nach Bedarf */
-      /* width: auto; */ /* Behält das Seitenverhältnis bei */
-      /* max-width: 180px; */ /* Beispiel: Maximale Breite, falls es zu groß wird */
-      opacity: 0.8; /* Optional: Etwas dezenter, da es nicht im Header ist */
+      height: 50px;
+      opacity: 0.8;
     }
-
 
     @media (max-width: 768px) {
       .logo-text {
@@ -214,30 +211,46 @@
       <div class="logo-text">IVDY</div> <div class="premium-badge">Premium</div>
     </div>
 
-      <div class="footer-logo-container">
-      <img src="IVDY-logo-transparent.png" alt="IVDY Logo unten" class="footer-logo-image">
+    <div class="footer-logo-container">
+      <img src="IVDY-logo-transparent.png" alt="IVDY Logo bottom" class="footer-logo-image">
     </div>
 
     <h2 class="promo-main-title">Erhalten Sie uneingeschränkten Zugriff auf alle Funktionen</h2>
+    <div class="translation">Get unlimited access to all features</div>
 
     <div class="features">
-      <div class="feature">KI-gestützte Bluttest-Analyse</div>
-      <div class="feature">Testosteron-Check</div>
-      <div class="feature">Hormon-Analyse</div>
-      <div class="feature">Fernüberwachung von Vitalparametern</div>
+      <div class="feature">
+        KI-gestützte Bluttest-Analyse
+        <div class="translation">AI-powered blood test analysis</div>
+      </div>
+      <div class="feature">
+        Testosteron-Check
+        <div class="translation">Testosterone check</div>
+      </div>
+      <div class="feature">
+        Hormon-Analyse
+        <div class="translation">Hormone analysis</div>
+      </div>
+      <div class="feature">
+        Fernüberwachung von Vitalparametern
+        <div class="translation">Remote monitoring of vital parameters</div>
+      </div>
     </div>
 
-    <p class="promo-price-details">Nur 29 €/WOCHE, automatisch erneuert</p>
-    <a href="https://buy.stripe.com/cN23fl6G9gxTbw48xo" class="button" target="_blank">IVDY CheckUp Starten</a>
+    <p class="promo-price-details">
+      Nur 29 €/WOCHE, automatisch erneuert
+      <div class="translation">Only €29/WEEK, auto-renewed</div>
+    </p>
+
+    <a href="https://buy.stripe.com/cN23fl6G9gxTbw48xo" class="button" target="_blank">
+      IVDY CheckUp Starten<br>
+      <span class="translation">Start IVDY CheckUp</span>
+    </a>
 
     <div class="footer-logo-container">
-      <img src="IVDY-logo-transparent.png" alt="IVDY Logo unten" class="footer-logo-image">
+      <img src="IVDY-logo-transparent.png" alt="IVDY Logo bottom" class="footer-logo-image">
     </div>
   </div>
-
-  <script>
-    // Kein spezifisches JavaScript für die Logo-Anzeige benötigt
-  </script>
 
 </body>
 </html>
